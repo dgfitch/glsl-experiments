@@ -1,3 +1,4 @@
+# Originally from http://freshfoo.com/posts/pulseaudio_monitoring/
 import sys
 from Queue import Queue
 from ctypes import POINTER, c_ubyte, c_void_p, c_ulong, cast
@@ -6,10 +7,10 @@ from ctypes import POINTER, c_ubyte, c_void_p, c_ulong, cast
 from pulseaudio.lib_pulseaudio import *
 
 SINK_NAME = 'cras-sink'  # edit to match your sink
-METER_RATE = 344
+METER_RATE = 10
 MAX_SAMPLE_VALUE = 127
-DISPLAY_SCALE = 2
-MAX_SPACES = MAX_SAMPLE_VALUE >> DISPLAY_SCALE
+DEBUG = False
+SMOOTH = False
 
 class PeakMonitor(object):
 
@@ -44,7 +45,7 @@ class PeakMonitor(object):
         state = pa_context_get_state(context)
 
         if state == PA_CONTEXT_READY:
-            print "Pulseaudio connection ready..."
+            if DEBUG: print "Pulseaudio connection ready..."
             # Connected to Pulseaudio. Now request that sink_info_cb
             # be called with information about the available sinks.
             o = pa_context_get_sink_info_list(context, self._sink_info_cb, None)
@@ -61,17 +62,15 @@ class PeakMonitor(object):
             return
 
         sink_info = sink_info_p.contents
-        print '-'* 60
-        print 'index:', sink_info.index
-        print 'name:', sink_info.name
-        print 'description:', sink_info.description
+        if DEBUG: print '-'* 60
+        if DEBUG: print 'index:', sink_info.index
+        if DEBUG: print 'name:', sink_info.name
+        if DEBUG: print 'description:', sink_info.description
 
         if sink_info.name == self.sink_name:
             # Found the sink we want to monitor for peak levels.
             # Tell PA to call stream_read_cb with peak samples.
-            print
-            print 'setting up peak recording using', sink_info.monitor_source_name
-            print
+            if DEBUG: print 'setting up peak recording using', sink_info.monitor_source_name
             samplespec = pa_sample_spec()
             samplespec.channels = 1
             samplespec.format = PA_SAMPLE_U8
@@ -99,12 +98,13 @@ class PeakMonitor(object):
 
 def main():
     monitor = PeakMonitor(SINK_NAME, METER_RATE)
+    level = 0
     for sample in monitor:
-        sample = sample >> DISPLAY_SCALE
-        bar = '>' * sample
-        spaces = ' ' * (MAX_SPACES - sample)
-        print ' %3d %s%s\r' % (sample, bar, spaces),
-        sys.stdout.flush()
+        if SMOOTH:
+            level = (level + sample) / 2.0
+            print 'u_amp,%d' % (level)
+        else:
+            print 'u_amp,%d' % (sample)
 
 if __name__ == '__main__':
     main()

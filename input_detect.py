@@ -1,3 +1,4 @@
+# Originally from http://freshfoo.com/posts/pulseaudio_monitoring/
 import sys
 from Queue import Queue
 from ctypes import POINTER, c_ubyte, c_void_p, c_ulong, cast
@@ -5,22 +6,22 @@ from ctypes import POINTER, c_ubyte, c_void_p, c_ulong, cast
 # From https://github.com/Valodim/python-pulseaudio
 from pulseaudio.lib_pulseaudio import *
 
-SINK_NAME = 'cras-sink'  # edit to match your sink
-METER_RATE = 344
+SOURCE_NAME = 'cras-source'  # edit to match your source
+METER_RATE = 60
 MAX_SAMPLE_VALUE = 127
-DISPLAY_SCALE = 2
-MAX_SPACES = MAX_SAMPLE_VALUE >> DISPLAY_SCALE
+DEBUG = False
+SMOOTH = False
 
 class PeakMonitor(object):
 
-    def __init__(self, sink_name, rate):
-        self.sink_name = sink_name
+    def __init__(self, source_name, rate):
+        self.source_name = source_name
         self.rate = rate
 
         # Wrap callback methods in appropriate ctypefunc instances so
         # that the Pulseaudio C API can call them
         self._context_notify_cb = pa_context_notify_cb_t(self.context_notify_cb)
-        self._sink_info_cb = pa_sink_info_cb_t(self.sink_info_cb)
+        self._source_info_cb = pa_source_info_cb_t(self.source_info_cb)
         self._stream_read_cb = pa_stream_request_cb_t(self.stream_read_cb)
 
         # stream_read_cb() puts peak samples into this Queue instance
@@ -44,10 +45,10 @@ class PeakMonitor(object):
         state = pa_context_get_state(context)
 
         if state == PA_CONTEXT_READY:
-            print "Pulseaudio connection ready..."
-            # Connected to Pulseaudio. Now request that sink_info_cb
+            if DEBUG: print "Pulseaudio connection ready..."
+            # Connected to Pulseaudio. Now request that source_info_cb
             # be called with information about the available sinks.
-            o = pa_context_get_sink_info_list(context, self._sink_info_cb, None)
+            o = pa_context_get_source_info_list(context, self._source_info_cb, None)
             pa_operation_unref(o)
 
         elif state == PA_CONTEXT_FAILED :
@@ -56,22 +57,22 @@ class PeakMonitor(object):
         elif state == PA_CONTEXT_TERMINATED:
             print "Connection terminated"
 
-    def sink_info_cb(self, context, sink_info_p, _, __):
-        if not sink_info_p:
+    def source_info_cb(self, context, source_info_p, _, __):
+        if not source_info_p:
             return
 
-        sink_info = sink_info_p.contents
-        print '-'* 60
-        print 'index:', sink_info.index
-        print 'name:', sink_info.name
-        print 'description:', sink_info.description
+        source_info = source_info_p.contents
+        if DEBUG:
+            print '-'* 60
+            print 'index:', source_info.index
+            print 'name:', source_info.name
+            print 'description:', source_info.description
 
-        if sink_info.name == self.sink_name:
-            # Found the sink we want to monitor for peak levels.
+        if source_info.name == self.source_name:
+            # Found the source we want to monitor for peak levels.
             # Tell PA to call stream_read_cb with peak samples.
-            print
-            print 'setting up peak recording using', sink_info.monitor_source_name
-            print
+            if DEBUG:
+                print 'setting up peak recording using', source_info.name
             samplespec = pa_sample_spec()
             samplespec.channels = 1
             samplespec.format = PA_SAMPLE_U8
@@ -80,9 +81,9 @@ class PeakMonitor(object):
             pa_stream = pa_stream_new(context, "peak detect demo", samplespec, None)
             pa_stream_set_read_callback(pa_stream,
                                         self._stream_read_cb,
-                                        sink_info.index)
+                                        source_info.index)
             pa_stream_connect_record(pa_stream,
-                                     sink_info.monitor_source_name,
+                                     None, # Uses default microphone source I think
                                      None,
                                      PA_STREAM_PEAK_DETECT)
 
@@ -98,13 +99,14 @@ class PeakMonitor(object):
         pa_stream_drop(stream)
 
 def main():
-    monitor = PeakMonitor(SINK_NAME, METER_RATE)
+    monitor = PeakMonitor(SOURCE_NAME, METER_RATE)
+    level = 0
     for sample in monitor:
-        sample = sample >> DISPLAY_SCALE
-        bar = '>' * sample
-        spaces = ' ' * (MAX_SPACES - sample)
-        print ' %3d %s%s\r' % (sample, bar, spaces),
-        sys.stdout.flush()
+        if SMOOTH:
+            level = (level + sample) / 2.0
+            print 'u_amp,%d' % (level)
+        else:
+            print 'u_amp,%d' % (sample)
 
 if __name__ == '__main__':
     main()
