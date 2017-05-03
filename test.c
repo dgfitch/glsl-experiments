@@ -3,8 +3,7 @@
 
 #define PI 3.14159265
 
-int main ()
-{
+int main () {
   double count, val;
 
   count = 0;
