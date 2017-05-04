@@ -6,14 +6,21 @@
 #include <math.h>
 #include <pulse/simple.h>
 #include <pulse/error.h>
+#include <pthread.h>
 
 #define BUFSIZE 32
 
 //#define RATE 44100
-#define RATE 16000
+#define RATE 8000
 
-#define DELAY 100
+#define DELAY 1000
 #define SCALE BUFSIZE * 256
+
+// For debugging peak levels
+//#define PEAK
+
+// Audio is too CPU intensive as is, needs async rewrite or a better way to "peek"
+//#define AUDIO
 
 int16_t buffer[BUFSIZE];
 
@@ -67,44 +74,71 @@ int flush() {
   pa_simple_flush(s, &error);
 }
 
+float calc_bpus(float bpm) {
+  return 1000000.0 / (bpm / 60.0);
+}
+
 
 int main() {
-	int result;
+	double result = 0.0;
   float bpm = 120.0;
-  float bpus = 100000.0 / (bpm / 60.0);
+  float bpus = calc_bpus(bpm);
   int count_beat = 0;
   float beat = 1.0;
 
+  int count_tap = 0;
+
+  printf("bpus: %f\n", bpus);
+
+  double peak = 0.0;
+
+  #ifdef AUDIO
 	pulseaudio_begin("nothing");
+  #endif
 
 	while(1) {
+    #ifdef AUDIO
 		pulseaudio_read(buffer, 32);
     flush();
 
-		// TODO: average the array or do smart falloff of some kind
+		// TODO: do smart falloff of some kind
 
 		result = 0;
 		for(int i = 0; i < 32; i++) {
 			result += abs(buffer[i]);
 		}
-		result /= SCALE;
+    result /= BUFSIZE;
+    result = log(result) / 10.0;
+    #endif
 
     // Hack-ass beat tap tempo
     beat *= 0.98;
-    count_beat += DELAY;
-    if (count_beat >= bpus) {
+    count_beat += 1;
+    if (count_beat * DELAY >= bpus) {
       beat = 1.0;
+      printf("B\n");
       count_beat = 0;
     }
 
-		printf("u_amp,%i\n", abs(result));
-		printf("u_beat,%f\n", beat);
+    #ifdef PEAK
+    if (result >= peak) {
+      printf("New peak: %f\n", result);
+      peak = result;
+    }
+    #else
+      #ifdef AUDIO
+      printf("u_amp,%f\n", result);
+      #endif
+		  //printf("u_beat,%f\n", beat);
+    #endif
 
 		usleep(DELAY);
 	}
 
 	finish:
+  #ifdef AUDIO
 	pulseaudio_end();
+  #endif
 
 	return 0;
 }
