@@ -1,2 +1,2 @@
 make
-./audio | glslViewer $*
+./beat | glslViewer main.frag
