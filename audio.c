@@ -1,109 +1,110 @@
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
-#include <assert.h>
-#include <pulse/pulseaudio.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <math.h>
+#include <pulse/simple.h>
+#include <pulse/error.h>
 
-// TODO - yet to port
-#define BUFSIZE 1024
-#define SOURCE_NAME "cras-source" // edit to match your source
-#define METER_RATE 60
-#define MAX_SAMPLE_VALUE 127
-#define DEBUG 0
-#define SMOOTH 0
+#define BUFSIZE 32
 
-#define FORMAT PA_SAMPLE_U8
-#define RATE 44100
+//#define RATE 44100
+#define RATE 16000
 
-void context_state_cb(pa_context* context, void* mainloop);
-void source_info_cb(pa_context *context, const pa_source_info *i, int eol, void *userdata);
-void stream_read_callback(pa_stream *s, size_t length, void *userdata);
+#define DELAY 100
+#define SCALE BUFSIZE * 256
 
-typedef struct pa_devicelist {
-        uint8_t initialized;
-        char name[512];
-        uint32_t index;
-        char description[256];
-} pa_devicelist_t;
+int16_t buffer[BUFSIZE];
 
-int main(int argc, char *argv[]) {
-    pa_threaded_mainloop *mainloop;
-    pa_mainloop_api *mainloop_api;
-    pa_context *context;
+static pa_simple *s = NULL;
+static char name_buf[] = "PulseAudio default device";
 
-    // Get a mainloop and its context
-    mainloop = pa_threaded_mainloop_new();
-    assert(mainloop);
-    mainloop_api = pa_threaded_mainloop_get_api(mainloop);
-    context = pa_context_new(mainloop_api, "c_peak_demo");
-    assert(context);
+int pulseaudio_standby(int sfreq, void *dummy) {
+  return 0;
+}
+ 
+int pulseaudio_begin(char *arg) {
+  int error;
 
-    // Set a callback so we can wait for the context to be ready
-    pa_context_set_state_callback(context, &context_state_cb, mainloop);
+  static const pa_sample_spec ss = {
+  	.format = PA_SAMPLE_S16LE,
+  	.rate = RATE,
+  	.channels = 1
+  };
+  
+  if (!(s = pa_simple_new(NULL, "Boguspath", PA_STREAM_RECORD, NULL, "record", &ss, NULL, NULL, &error))) {
+    printf("Error: pulseaudio: pa_simple_new() failed: %s\n", pa_strerror(error));
+    return 1;
+  }
+  return 0;
+}
 
-    // Lock the mainloop so that it does not run and crash before the context is ready
-    pa_threaded_mainloop_lock(mainloop);
+int pulseaudio_end() {
+  if (s != NULL) {
+    pa_simple_free(s);
+    s = NULL;
+  }
+  return 0;
+}
 
-    // Start the mainloop
-    assert(pa_threaded_mainloop_start(mainloop) == 0);
-    assert(pa_context_connect(context, NULL, PA_CONTEXT_NOAUTOSPAWN, NULL) == 0);
+int pulseaudio_read (int16_t *buf, int sampnum) {
+  int error;
+  int cnt, bufsize;
 
-		printf("Started mainloop\n");
+  bufsize = sampnum * sizeof(int16_t);
+  if (bufsize > BUFSIZE) bufsize = BUFSIZE;
 
-    // Wait for the context to be ready
-    while(1) {
-				printf("Checking context state\n");
-        pa_context_state_t context_state = pa_context_get_state(context);
-        assert(PA_CONTEXT_IS_GOOD(context_state));
-        if (context_state == PA_CONTEXT_READY) break;
-        pa_threaded_mainloop_wait(mainloop);
+  if (pa_simple_read(s, buf, bufsize, &error) < 0) {
+        printf("Error: pa_simple_read() failed: %s\n", pa_strerror(error));
+  }
+  cnt = bufsize / sizeof(int16_t);
+  return (cnt);
+}
+
+int flush() {
+  int error;
+  pa_simple_flush(s, &error);
+}
+
+
+int main() {
+	int result;
+  float bpm = 120.0;
+  float bpus = 100000.0 / (bpm / 60.0);
+  int count_beat = 0;
+  float beat = 1.0;
+
+	pulseaudio_begin("nothing");
+
+	while(1) {
+		pulseaudio_read(buffer, 32);
+    flush();
+
+		// TODO: average the array or do smart falloff of some kind
+
+		result = 0;
+		for(int i = 0; i < 32; i++) {
+			result += abs(buffer[i]);
+		}
+		result /= SCALE;
+
+    // Hack-ass beat tap tempo
+    beat *= 0.98;
+    count_beat += DELAY;
+    if (count_beat >= bpus) {
+      beat = 1.0;
+      count_beat = 0;
     }
 
-		printf("Context ready\n");
-		printf("Running op\n");
+		printf("u_amp,%i\n", abs(result));
+		printf("u_beat,%f\n", beat);
 
-		pa_operation *op;
-		pa_devicelist_t input[16];
-	  memset(input, 0, sizeof(pa_devicelist_t) * 16);
-		op = pa_context_get_source_info_list(context, &source_info_cb, input);
-		pa_operation_unref(op);
-		printf("Waiting\n");
+		usleep(DELAY);
+	}
 
-    // Go until we get a character
-    getc(stdin);
-		return(0);
+	finish:
+	pulseaudio_end();
+
+	return 0;
 }
-
-void context_state_cb(pa_context* context, void* mainloop) {
-    pa_threaded_mainloop_signal(mainloop, 0);
-}
-
-void source_info_cb(pa_context *context, const pa_source_info *i, int eol, void *userdata) {
-		if (i->name == SOURCE_NAME) {
-				static const pa_sample_spec ss = {
-						.format = PA_SAMPLE_U8,
-						.rate = RATE,
-						.channels = 1
-				};
-				pa_stream *stream = NULL;
-				stream = pa_stream_new(context, "peak detect demo", &ss, NULL);
-			  const int *index = &(i->index);
-			  pa_stream_set_read_callback(stream, &stream_read_callback, &index);
-				pa_stream_connect_record(stream, NULL, NULL, PA_STREAM_PEAK_DETECT);
-		}
-}
-
-void stream_read_callback(pa_stream *s, size_t length, void *userdata) {
-    const void *data;
-    assert(s);
-    assert(length > 0);
-		pa_stream_peek(s, &data, &length);
-
-    assert(s);
-    assert(length > 0);
-
-		// TODO - do something with data
-		printf("Data is %p", data);
-
-		pa_stream_drop(s);
-}
-
