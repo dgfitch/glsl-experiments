@@ -1,4 +1,0 @@
-Get C interface to pulse audio working
-Tee to a shared pipe that the glslViewer process reads from
-  - beat/bpm adjustment
-  - amp from playing audio or input or combination??

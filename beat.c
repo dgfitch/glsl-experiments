@@ -1,3 +1,8 @@
+/*
+ * A truly 
+ *
+ */
+
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -10,6 +15,7 @@
 
 #define DELAY 40000
 //#define DEBUG
+
 
 
 float calc_uspb(float bpm) {
@@ -76,7 +82,7 @@ int main() {
     timersub(&t2, &t1, &dt);
     microseconds = dt.tv_sec * 1000000 + dt.tv_usec;
 
-    uspb = microseconds / 4.0;
+    uspb = microseconds / 3.0;
     #ifdef DEBUG
     printf("uspb is now %f\n", uspb);
     #endif

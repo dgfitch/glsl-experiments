@@ -26,15 +26,16 @@ void main() {
   d = length( min(abs(uv)-.4,0.) );
 	// change last 0. to 1. for strobe, 0.5 for partial strobe
   // d = length( max(abs(uv)-(u_beat*0.5)+0.3,0.1) );
-  d *= u_beat;
+  //d *= u_beat;
 
   // Visualize the distance field
   gl_FragColor = vec4(vec3(fract(d*(10.0+sin(u_time)*20.0))),1.0);
 
   // Drawing with the distance field
-  //gl_FragColor = vec4(vec3( step(.3,d) ),1.0);
+  // gl_FragColor = vec4(vec3( step(.3,d) ),1.0);
   // gl_FragColor = vec4(vec3( step(.3,d) * step(d,.4)),1.0);
   // gl_FragColor = vec4(vec3( smoothstep(.3,.4,d)* smoothstep(.6,.5,d)) ,1.0);
 }
+
 
 
