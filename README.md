@@ -22,9 +22,14 @@ If you want to learn how to use this stuff, or how GLSL works, I recommend [The 
   - maybe the problem was just default STDOUT buffering? try without
   - combine with `beat`, either with `tail` or `tee` or something
 - vim macros or kb shortcuts to do quick changes, cut uniforms off, etc.
+  - quick save 
+  - quick undo N changes and save 
 - Tee to a shared pipe that the glslViewer process reads from
   - multiple beats/bpm adjustment
   - amp from playing audio or input or combination??
+- it would be cool to keep revision history of evolution through a set in realtime 
+  - vim undo buffers? 
+  - git autocommit?
 
 ## Misc 
 
