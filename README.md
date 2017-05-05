@@ -6,7 +6,7 @@ If you want to learn how to use this stuff, or how GLSL works, I recommend [The 
 
 ## Shows
 
-- [20170504](20170504) - Glassmen, Maniac du Jour, Twelves
+- [20170504](shows/20170504) - Glassmen, Maniac du Jour, Twelves @ Williamson Magnetic Co.
 
 ## Tools used:
 
@@ -18,7 +18,9 @@ If you want to learn how to use this stuff, or how GLSL works, I recommend [The 
 
 ## TODO
 
-- Get C interface to pulse audio working well, combine with beat
+- Get C interface to pulse audio working well
+  - maybe the problem was just default STDOUT buffering? try without
+  - combine with `beat`, either with `tail` or `tee` or something
 - vim macros or kb shortcuts to do quick changes, cut uniforms off, etc.
 - Tee to a shared pipe that the glslViewer process reads from
   - multiple beats/bpm adjustment

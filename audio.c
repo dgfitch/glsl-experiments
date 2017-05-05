@@ -1,3 +1,6 @@
+// attempt to read out from pulseaudio source and turn into uniform CSV for glslViewer
+// TODO: too CPU intensive as is, needs async rewrite or a better way to "peek"
+
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -19,8 +22,6 @@
 // For debugging peak levels
 //#define PEAK
 
-// Audio is too CPU intensive as is, needs async rewrite or a better way to "peek"
-//#define AUDIO
 
 int16_t buffer[BUFSIZE];
 
