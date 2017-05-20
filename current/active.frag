@@ -10,10 +10,11 @@ uniform float u_amp;
 uniform float u_beat;
 
 void main (void) {
-  float beat = u_amp;
-  vec3 cold = vec3(0.,0,1.);
-  vec3 hot = vec3(1.,0.,0.);
+  float amp = u_amp;
+  float beat = u_beat;
+  vec3 cold = vec3(0.,0.,beat);
+  vec3 hot = vec3(beat,0.,0.);
 
-	gl_FragColor = vec4(mix(cold, hot, beat),1.0);
+	gl_FragColor = vec4(mix(cold, hot, amp),1.0);
 }
 

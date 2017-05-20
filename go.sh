@@ -1,2 +1,2 @@
 make
-./beat | glslViewer main.frag
+./bin/uniform | glslViewer current/active.frag

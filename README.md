@@ -2,7 +2,15 @@
 
 Work in progress.
 
-If you want to learn how to use this stuff, or how GLSL works, I recommend [The Book of Shaders](https://thebookofshaders.com/) where you can learn and experiment right in your browser. (Chrome probably works best?) [Gibber](http://gibber.cc/) is also a whole bundle of fun, only a browser needed.
+The main tool I'm using is [uniform.c](uniform.c), which pipes a tap-tempo
+`u_beat` uniform and an audio amplitude `u_amp` amplitude into 
+glslViewer.
+
+If you want to learn how to use this stuff, or how GLSL works, I recommend 
+[The Book of Shaders](https://thebookofshaders.com/) where you can learn and 
+experiment right in your browser. (Chrome probably works best?) 
+[Gibber](http://gibber.cc/) is also a whole bundle of fun, only a browser 
+needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
@@ -10,26 +18,21 @@ If you want to learn how to use this stuff, or how GLSL works, I recommend [The 
 
 ## Tools used:
 
-- [gibber](http://gibber.cc/) for prototyping and learning
 - [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer) for compile/display
 - [vim](http://www.vim.org/) for quick editing
-- my crappy C utilities in this repo for tap tempo
-  - pulseaudio soon for audio detection, make sure you have libpulse-dev or equivalent package to mess with this
+- My crappy uniform.c for tap tempo and audio input
+  - You will need libpulse-dev or equivalent package to use this
+  - I have no idea how to make this work on OSX or Windows
 
 ## TODO
 
-- Get C interface to pulse audio working well
-  - maybe the problem was just default STDOUT buffering? try without
-  - combine with `beat`, either with `tail` or `tee` or something
 - vim macros or kb shortcuts to do quick changes, cut uniforms off, etc.
   - quick save 
   - quick undo N changes and save 
-- Tee to a shared pipe that the glslViewer process reads from
-  - multiple beats/bpm adjustment
-  - amp from playing audio or input or combination??
 - it would be cool to keep revision history of evolution through a set in realtime 
   - vim undo buffers? 
   - git autocommit?
+    - https://github.com/tlvince/vim-auto-commit
 
 ## Misc 
 
