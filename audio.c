@@ -1,11 +1,11 @@
 // attempt to read out from pulseaudio source and turn into uniform CSV for glslViewer
-// TODO: too CPU intensive as is, needs async rewrite or a better way to "peek"
 
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <math.h>
 #include <pulse/simple.h>
 #include <pulse/error.h>
@@ -14,10 +14,9 @@
 #define BUFSIZE 32
 
 //#define RATE 44100
-#define RATE 8000
+#define RATE 1000
 
-#define DELAY 1000
-#define SCALE BUFSIZE * 256
+#define DELAY 4000
 
 // For debugging peak levels
 //#define PEAK
@@ -81,28 +80,21 @@ float calc_bpus(float bpm) {
 
 
 int main() {
+  setbuf(stdout, NULL);
+  setbuf(stdin, NULL);
+
 	double result = 0.0;
-  float bpm = 120.0;
-  float bpus = calc_bpus(bpm);
-  int count_beat = 0;
-  float beat = 1.0;
-
-  int count_tap = 0;
-
-  printf("bpus: %f\n", bpus);
-
+	double last_result = 0.0;
   double peak = 0.0;
 
-  #ifdef AUDIO
 	pulseaudio_begin("nothing");
-  #endif
 
 	while(1) {
-    #ifdef AUDIO
 		pulseaudio_read(buffer, 32);
-    flush();
+    //flush();
 
-		// TODO: do smart falloff of some kind
+		// TODO: do smart falloff or averaging
+    // of some kind to deal with low-end noise
 
 		result = 0;
 		for(int i = 0; i < 32; i++) {
@@ -110,15 +102,10 @@ int main() {
 		}
     result /= BUFSIZE;
     result = log(result) / 10.0;
-    #endif
-
-    // Hack-ass beat tap tempo
-    beat *= 0.98;
-    count_beat += 1;
-    if (count_beat * DELAY >= bpus) {
-      beat = 1.0;
-      printf("B\n");
-      count_beat = 0;
+    if (result < 0.2) {
+      result = result / 3.0;
+    } else if (result < 0.4) {
+      result = result / 2.0;
     }
 
     #ifdef PEAK
@@ -127,19 +114,14 @@ int main() {
       peak = result;
     }
     #else
-      #ifdef AUDIO
       printf("u_amp,%f\n", result);
-      #endif
-		  //printf("u_beat,%f\n", beat);
     #endif
 
 		usleep(DELAY);
 	}
 
 	finish:
-  #ifdef AUDIO
 	pulseaudio_end();
-  #endif
 
 	return 0;
 }

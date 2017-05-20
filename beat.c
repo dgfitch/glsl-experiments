@@ -1,5 +1,11 @@
 /*
- * A truly 
+ * beat.c
+ *
+ * A truly stupid way to generate and pipe values
+ * into glslViewer.
+ *
+ * Current features:
+ * - beat uniform from tapping inputs
  *
  */
 
@@ -53,6 +59,7 @@ int main() {
   setbuf(stdout, NULL);
 
   bpm = 120.0;
+  // microseconds per beat
   uspb = calc_uspb(bpm);
 
   struct timeval t1, t2, w1, w2, dt;
@@ -68,13 +75,15 @@ int main() {
 	while(1) {
     start:
     getchar();
+    // TODO: diff chars how?
+
     gettimeofday(&t1, NULL);
     for(int i=0; i<3; i++) {
       gettimeofday(&w1, NULL);
       getchar();
       gettimeofday(&w2, NULL);
       timersub(&w2, &w1, &dt);
-      if (dt.tv_sec > 1.0) {
+      if (dt.tv_sec > 2.0) {
         goto start;
       }
     }
@@ -82,6 +91,7 @@ int main() {
     timersub(&t2, &t1, &dt);
     microseconds = dt.tv_sec * 1000000 + dt.tv_usec;
 
+    // we take 4 taps
     uspb = microseconds / 3.0;
     #ifdef DEBUG
     printf("uspb is now %f\n", uspb);
