@@ -30,9 +30,6 @@ needed to learn GLSL and make generative music along with it.
   - quick save 
   - quick undo N changes and save 
 - it would be cool to keep revision history of evolution through a set in realtime 
-  - vim undo buffers? 
-  - git autocommit?
-    - https://github.com/tlvince/vim-auto-commit
 
 ## Misc 
 
