@@ -15,6 +15,7 @@ needed to learn GLSL and make generative music along with it.
 ## Shows
 
 - [20170504](shows/20170504) - Glassmen, Maniac du Jour, Twelves @ Williamson Magnetic Co.
+- [20170602](shows/20170602) - And Illusions, Pat Keen, Tippy @ Arts + Literature Laboratory
 
 ## Tools used:
 
