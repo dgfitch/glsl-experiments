@@ -23,7 +23,7 @@ needed to learn GLSL and make generative music along with it.
 - [vim](http://www.vim.org/) for quick editing
 - My crappy uniform.c for tap tempo and audio input
   - You will need libpulse-dev or equivalent package to use this
-  - I have no idea how to make this work on OSX or Windows, sorry
+  - I have no idea how to make this compile on OSX or Windows, sorry
 
 ## TODO
 
