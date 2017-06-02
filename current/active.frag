@@ -10,11 +10,21 @@ uniform float u_amp;
 uniform float u_beat;
 
 void main (void) {
-  float amp = u_amp;
-  float beat = u_beat;
-  vec3 cold = vec3(0.,0.,beat);
-  vec3 hot = vec3(beat,0.,0.);
+  float b = u_beat;
+  float a = u_amp;
+  float t = u_time;
 
-	gl_FragColor = vec4(mix(cold, hot, amp),1.0);
+  // // BEAT
+  // b *= 0.1;
+
+  // AMP
+  a *= 0.1;
+
+  // // TIME
+  // t *= 0.1;
+
+  vec3 cold = vec3(0.,a,1.);
+  vec3 hot = vec3(1.0,0.,0.);
+
+	gl_FragColor = vec4(mix(cold, hot, b),1.0);
 }
-
