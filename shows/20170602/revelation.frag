@@ -64,7 +64,7 @@ void main() {
   b = sin(bt * 2.0 + speed);
 
   // loudness gate by amplitude
-  loud = loud && a > 0.4;
+  // loud = loud && a > 0.4;
 
   float gt = uv.x;
   gt *= loud ? 1.0 : b;
@@ -87,6 +87,14 @@ void main() {
   g /= r+z;
   //b += r*g*z;
   b /= g*z * 0.8;
+
+  r = clamp(r,0.0,1.0);
+  b = clamp(b,0.0,1.0);
+  g = clamp(g,0.0,1.0);
+
+  r *= 0.5;
+  b *= 0.5;
+  g *= 0.5;
 
   gl_FragColor = vec4( r, g, b, 1.0 ); // + t;
 }

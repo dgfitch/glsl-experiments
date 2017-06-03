@@ -42,7 +42,7 @@ void main() {
   uv.x *= cos(uv.y + sin(uv.x));
   uv.y *= sin(uv.x + p);
   uv.x += -4.0;
-  uv *= 15.2;
+  uv *= 1.2;
   uv *= rotation;
 
   // uv *= 10.2;
@@ -57,13 +57,17 @@ void main() {
   // b *= a;
   r *= p;
 
-  //b *= 0.4;
-  //r *= 0.4;
-  //g *= 0.4;
-
   r += 0.7;
   b += 0.5;
   //g *= 0.4;
+
+  r = clamp(r,0.0,1.0);
+  b = clamp(b,0.0,1.0);
+  g = clamp(g,0.0,1.0);
+
+  r *= 0.5;
+  b *= 0.5;
+  g *= 0.5;
 
   gl_FragColor = vec4( r, g, b, 1.0 );
 }
