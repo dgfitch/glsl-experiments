@@ -14,12 +14,12 @@ void main() {
 
   for( float i = 0.; i < 8.; i++ ){
     //CHAOS SPILL
-    //uv.x += sin( uv.y + time * i + 2.0);
-    //uv.y -= amp * sin(uv.x * i);
+    uv.x += sin( uv.y + time * i + 2.0);
+    uv.y -= amp * sin(uv.x * i);
 
     //JITTER SHAKE
-    //uv.x += sin( uv.y + time * i + 2.0);
-    //uv.y += amp + sin(uv.x * i);
+    uv.x += sin( uv.y + time * i + 2.0);
+    uv.y += amp + sin(uv.x * i);
 
     b = uv.y / uv.x;
     b += amp;

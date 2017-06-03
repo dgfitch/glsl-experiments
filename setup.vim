@@ -17,15 +17,29 @@ endfunction
 
 command! -nargs=+ SaveActive :call SaveActive(<q-args>)
 
-nnoremap <Leader>o `O:SaveActive()<CR>
-nnoremap <Leader>p `P:SaveActive()<CR>
+nmap <Leader>q `Q:SaveActive()<CR>
+nmap <Leader>w `W:SaveActive()<CR>
+nmap <Leader>e `E:SaveActive()<CR>
+nmap <Leader>r `R:SaveActive()<CR>
+nmap <Leader>t `T:SaveActive()<CR>
+
+nmap <Leader>y `Ygc}:SaveActive()<CR>
+nmap <Leader>u `Ugc}:SaveActive()<CR>
+nmap <Leader>i `Igc}:SaveActive()<CR>
+nmap <Leader>o `Ogc}:SaveActive()<CR>
+nmap <Leader>p `Pgc}:SaveActive()<CR>
+
 nmap <Leader>b /\/\/ BEAT<CR>gc}:SaveActive()<CR>``
 nmap <Leader>a /\/\/ AMP<CR>gc}:SaveActive()<CR>``
 nmap <Leader>t /\/\/ TIME<CR>gc}:SaveActive()<CR>``
+
+nmap <Leader><CR> gc}:SaveActive()<CR>
+nmap <Leader><Backspace> gcc:SaveActive()<CR>
+vmap <Leader><Backspace> gc:SaveActive()<CR>
+
 nnoremap <Leader><Leader> :SaveActive()<CR>
 nnoremap <Leader>[ u:SaveActive()<CR>
 nnoremap <Leader>] <C-R>:SaveActive()<CR>
-nnoremap <Leader><Space> <C-W><C-P>:SaveActive()<CR>
 
 inoremap <Leader><Leader> <Esc>:SaveActive()<CR>i
 
