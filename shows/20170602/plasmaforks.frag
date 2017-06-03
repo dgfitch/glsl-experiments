@@ -22,9 +22,10 @@ void main() {
   float angle = t * spin_speed;
   
   // TIME
-  angle *= 0.1;
+  t *= 0.1;
+  angle *= 0.01;
 
-  // // BEAT
+  // // // BEAT
   // p *= 0.1;
 
   p *= 0.5; // tone it down bro
@@ -33,21 +34,21 @@ void main() {
   // angle += (1.1 * sin(p));
 
   // // AMP
-  // a *= 0.3;
+  // a *= 0.1;
 
-  a *= 0.2;
+  //a *= 0.2;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
 
-  uv *= 5.5; // zoom out
+  uv *= 3.5; // zoom out
 
-  uv *= a + 1.0; // zoom by amp
+  uv *= a * 0.2 + 1.0; // zoom by amp
 
   uv += 4.0; // decenter
 
   // // bounce zoom
-  // uv *= -5.5 + (p * 12.0);
+  // uv *= -1.5 + (p * 2.0);
 
   uv *= rotation;
 
@@ -57,8 +58,9 @@ void main() {
   uv.x *= cos(uv.y);
   // uv.x = clamp(uv.x,0.0,1.0);
   uv.y *= sin(p+uv.x);
+  uv.y += sin(t+uv.x);
 
-  b = abs(sin(uv.y * 0.2 + t));
+  b = abs(sin(uv.y * 0.5 + t));
 
   g = tan(uv.y * 0.2 + 0.25);
   // flicker
@@ -66,8 +68,9 @@ void main() {
 
   r = abs(sin(uv.y*p)*cos(b));
 
-  g *= sin(b);
+  g += sin(b);
   b += r*(max(g,a));
+  r += a;
 
   gl_FragColor = vec4( r, g, b, 1.0 );
 }

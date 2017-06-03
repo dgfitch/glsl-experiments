@@ -26,22 +26,24 @@ void main() {
   angle = t * spin_speed;
 
   // BEAT
-  p *= 0.02; // tone it down bro
+  p *= 0.4; // tone it down bro
 
   // // AMP
   a *= 0.1;
 
+  // a = 0.0;
+
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
 
-  // uv.x += sin(p);
-  // uv.x *= tan(uv.y + sin(uv.x));
-  uv.y *= sin(uv.x + p * a);
   uv *= rotation;
+  // uv.x += sin(p);
+  uv.x *= uv.y * cos(uv.x + sin(t));
+  uv.y *= sin(uv.x + p * a);
   // uv.x += -4.0;
   uv.y += 42.0;
-  // uv.y += a;
-  // uv *= 10.2;
+  uv.y += a;
+  uv *= 10.2;
 
   uv *= 10.2 + (p * a);
   // uv *= 10.2 * sin(t + a);
@@ -55,8 +57,9 @@ void main() {
   b += a;
   r *= a;
 
-  b *= 0.4;
+  // b *= 0.4;
   // r *= 0.4;
+  r += 0.4;
 
 
   gl_FragColor = vec4( r, g, b, 1.0 );
