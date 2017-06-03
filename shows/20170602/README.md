@@ -1,3 +1,9 @@
+# Video
+
+All my dumb phone got was [part of Pat Keen's set](https://youtu.be/YZ7kFqEV8Pg). Huzzah!
+
+----
+
 # Before the noise
 
 Did less pre-production work before this one; a quieter, more introspective kind of psychedelic show.
@@ -18,7 +24,7 @@ global marks or near comments like // AMP. That worked even better than I
 thought, although I need to include imap equivalents and get function key
 fast shortcuts.
 
-Prepped revelation.frag but didn't end up using that; mostly add-libbed 
+Prepped revelation.frag but didn't end up using that; mostly ad-lib
 stuff based on plain/between and threw in a little bit of the more psychedelic 
-plasmaforks from prior work.
+plasmaforks mutated from prior work.
 
