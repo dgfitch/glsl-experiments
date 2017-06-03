@@ -17,17 +17,16 @@ endfunction
 
 command! -nargs=+ SaveActive :call SaveActive(<q-args>)
 
-nmap <Leader>q `Q:SaveActive()<CR>
-nmap <Leader>w `W:SaveActive()<CR>
-nmap <Leader>e `E:SaveActive()<CR>
-nmap <Leader>r `R:SaveActive()<CR>
-nmap <Leader>t `T:SaveActive()<CR>
+nmap <Leader>q `QzOgc}:SaveActive()<CR>
+nmap <Leader>w `WzOgc}:SaveActive()<CR>
+nmap <Leader>e `EzOgc}:SaveActive()<CR>
+nmap <Leader>r `RzOgc}:SaveActive()<CR>
 
-nmap <Leader>y `Ygc}:SaveActive()<CR>
-nmap <Leader>u `Ugc}:SaveActive()<CR>
-nmap <Leader>i `Igc}:SaveActive()<CR>
-nmap <Leader>o `Ogc}:SaveActive()<CR>
-nmap <Leader>p `Pgc}:SaveActive()<CR>
+nmap <Leader>y `Y:SaveActive()<CR>
+nmap <Leader>u `U:SaveActive()<CR>
+nmap <Leader>i `I:SaveActive()<CR>
+nmap <Leader>o `O:SaveActive()<CR>
+nmap <Leader>p `P:SaveActive()<CR>
 
 nmap <Leader>b /\/\/ BEAT<CR>gc}:SaveActive()<CR>``
 nmap <Leader>a /\/\/ AMP<CR>gc}:SaveActive()<CR>``
@@ -35,6 +34,7 @@ nmap <Leader>t /\/\/ TIME<CR>gc}:SaveActive()<CR>``
 
 nmap <Leader><CR> gc}:SaveActive()<CR>
 nmap <Leader><Backspace> gcc:SaveActive()<CR>
+vmap <Leader><CR> gc:SaveActive()<CR>
 vmap <Leader><Backspace> gc:SaveActive()<CR>
 
 nnoremap <Leader><Leader> :SaveActive()<CR>

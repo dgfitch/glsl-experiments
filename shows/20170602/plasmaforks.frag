@@ -69,21 +69,6 @@ void main() {
   g *= sin(b);
   b += r*(max(g,a));
 
-  // tone it back
-  // uv = gl_FragCoord.xy/u_resolution.xy + vec2(-0.5,-0.5);
-  // uv.x *= cos(uv.y);
-  // uv.y *= tan(uv.x);
-  // uv *= 10.2;
-  // uv *= rotation;
-  // t *= 0.1;
-  // b = abs(sin(uv.y * 0.2 + t));
-  // g = abs(sin(uv.x * 0.2 + t));
-  // // b *= 0.4;
-  // // g *= 0.4;
-  // // b += 0.4;
-  // // g += 0.3;
-  // r = 0.0;
-
   gl_FragColor = vec4( r, g, b, 1.0 );
 }
 
