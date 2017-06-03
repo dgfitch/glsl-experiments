@@ -25,10 +25,10 @@ void main() {
   angle *= 0.1;
 
   // BEAT
-  p *= 0.05; // tone it down bro
+  p *= 0.5; // tone it down bro
 
   // // AMP
-  a *= 0.03;
+  a *= 0.3;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -45,10 +45,11 @@ void main() {
   g = abs(sin(uv.x * 0.2 + t));
   // r = g;
 
-  // b *= 0.4;
-  // g *= 0.4;
-  // b += 0.4;
-  // g += 0.3;
+  b += a;
+
+  b *= 0.4;
+  g *= 0.4;
+
 
   gl_FragColor = vec4( r, g, b, 1.0 );
 }
