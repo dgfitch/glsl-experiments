@@ -39,12 +39,13 @@ void main() {
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
 
-  uv.x *= cos(uv.y + sin(uv.x));
-  uv.y *= sin(uv.x + p);
+  uv.x *= cos(uv.x + sin(uv.x));
+  uv.y *= sin(uv.y + p);
   uv.x += -4.0;
   uv *= 1.2;
   uv *= rotation;
 
+  // uv *= 10.2;
   // uv *= 10.2;
   // uv *= 10.2 + (a);
   uv *= 10.2 * sin(t + a);
@@ -66,8 +67,12 @@ void main() {
   g = clamp(g,0.0,1.0);
 
   r *= 0.5;
-  b *= 0.5;
-  g *= 0.5;
+  b *= 0.2;
+  g *= 0.2;
+
+  // r *= 2.0;
+  // g *= 1.5;
+  // b *= 1.5;
 
   gl_FragColor = vec4( r, g, b, 1.0 );
 }

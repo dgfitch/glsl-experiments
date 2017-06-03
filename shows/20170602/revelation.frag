@@ -92,9 +92,9 @@ void main() {
   b = clamp(b,0.0,1.0);
   g = clamp(g,0.0,1.0);
 
-  r *= 0.5;
-  b *= 0.5;
-  g *= 0.5;
+  r *= 0.7;
+  b *= 0.2;
+  g *= 0.2;
 
-  gl_FragColor = vec4( r, g, b, 1.0 ); // + t;
+  gl_FragColor = vec4( r, g, b, 1.0 );
 }
