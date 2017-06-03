@@ -22,53 +22,56 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.010;
-  angle = t * spin_speed * 0.1;
+  t *= 0.030;
+  angle = spin_speed * 4.2 * t;
 
-  // BEAT
-  p *= 0.02; // tone it down bro
+  // // BEAT
+  // p *= 0.02; // tone it down bro
 
   p *= 0.2; // tone it down bro
 
-  // // // AMP
-  a *= 0.02;
+  // // AMP
+  // a *= 0.2;
 
   p = 0.0;
+  angle *= 0.1;
   a = 0.0;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
 
-  uv.x *= cos(uv.x + sin(uv.x));
-  uv.y *= sin(uv.y + p);
-  uv.x += -4.0;
-  uv *= 1.2;
   uv *= rotation;
+  uv.x *= cos(uv.x + sin(uv.y));
+  uv.y *= tan(uv.x + p);
+  // uv.x += -1.0;
+  uv.x += -2.0;
+  // uv.x += -4.0;
+  uv *= 4.2;
 
   // uv *= 10.2;
   // uv *= 10.2;
-  // uv *= 10.2 + (a);
+  // uv *= 8.2 + a;
   uv *= 10.2 * sin(t + a);
-  // uv *= 1000.0;
+  //uv *= 1000.0;
 
-  b = abs(sin(uv.y * 0.2 + t));
-  g = abs(sin(uv.x * 0.2 + t));
-  r = g + a;
+  b = abs(sin(uv.y * 0.3 + t));
+  g = abs(tan(uv.x * 0.2 + t));
+  r = abs(sin(b + a * p));
 
   // b *= a;
   r *= p;
 
-  r += 0.7;
-  b += 0.5;
-  //g *= 0.4;
+  r += 0.5;
+  // b += 0.3;
+  g *= 0.4;
 
   r = clamp(r,0.0,1.0);
   b = clamp(b,0.0,1.0);
   g = clamp(g,0.0,1.0);
 
-  r *= 0.5;
+  r *= 0.6;
   b *= 0.2;
-  g *= 0.2;
+  g *= 0.3;
 
   // r *= 2.0;
   // g *= 1.5;

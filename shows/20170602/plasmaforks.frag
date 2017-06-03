@@ -72,6 +72,15 @@ void main() {
   b += r*(max(g,a));
   r += a;
 
+  r = clamp(r,0.0,1.0);
+  b = clamp(b,0.0,1.0);
+  g = clamp(g,0.0,1.0);
+
+  r *= 0.6;
+  b *= 0.6;
+  g *= 0.6;
+
+
   gl_FragColor = vec4( r, g, b, 1.0 );
 }
 

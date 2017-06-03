@@ -26,12 +26,13 @@ void main() {
   angle = t * spin_speed;
 
   // BEAT
-  p *= 0.4; // tone it down bro
+  p *= 0.2; // tone it down bro
 
   // // AMP
-  a *= 0.1;
-
   // a = 0.0;
+
+  a *= 0.4;
+
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -41,9 +42,9 @@ void main() {
   uv.x *= uv.y * cos(uv.x + sin(t));
   uv.y *= sin(uv.x + p * a);
   // uv.x += -4.0;
-  uv.y += 42.0;
-  uv.y += a;
-  uv *= 10.2;
+  // uv.y += 42.0;
+  // uv.y += a;
+  uv *= 4.2;
 
   uv *= 10.2 + (p * a);
   // uv *= 10.2 * sin(t + a);
