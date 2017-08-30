@@ -12,6 +12,7 @@ float stroke(float x, float s, float w) {
   return clamp(d, 0., 1.);
 }
 
+
 float circle(vec2 st) {
   return length(st - .5) * 2.;
 }
@@ -58,22 +59,22 @@ void main() {
   cs = 0.2;
 
   color += stroke(uv.x, .5, cs * .5);
-  color += stroke(circle(uv), .5, cs);
+  color += stroke(circle(uv), .5 + abs(sin(t)) * .2, cs);
 
   for (int i=4; i<=8; i++) {
-    color += stroke(circle(uv), float(i) * (.25 - p), cs * .1 + a);
+    color += stroke(circle(uv), (float(i) + abs(sin(t))) * .2, cs * .1);
   }
 
   color.r = clamp(color.r,0.0,1.0);
   color.b = clamp(color.b,0.0,1.0);
   color.g = clamp(color.g,0.0,1.0);
 
-  color += vec3(sin(uv.x+t), cos(uv.y), 1.0);
-  color *= vec3(tan(sin(wv.x)+t/2.), tan(wv.y-a), 2.0);
+  // color += vec3(sin(uv.x+t), cos(uv.y), 1.0);
+  // color *= vec3(tan(sin(wv.x)+t/2.), tan(wv.y-a), 2.0);
 
-  color.r *= 2.8;
-  color.b *= 0.1;
-  color.g *= 1.2;
+  // color.r *= 0.8;
+  // color.b *= 0.2;
+  // color.g *= 0.2;
 
   gl_FragColor = vec4( color, 1.0 );
 }

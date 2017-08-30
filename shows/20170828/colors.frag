@@ -6,6 +6,7 @@ uniform vec2 u_resolution;
 
 #define M_PI 3.14159265358979323846
 
+
 void main() {
   float adjust_aspect = 0.4;
   vec2 aspect = vec2(1. + adjust_aspect * 2., 1.);
@@ -20,55 +21,54 @@ void main() {
   float g = 0.;
   float b = 0.;
   
-
+  float spin_speed = 0.3;
+  float angle = 0.0;
+  
   // TIME
-  t *= 0.2;
+  t *= 0.1;
+  angle = t * spin_speed;
 
   // BEAT
-  p *= 0.1;
+  p *= 0.2; // tone it down bro
 
-  // AMP
-  a *= 0.3;
+  // // AMP
+  // a = 0.0;
 
-  float angle = t * 0.05;
+  a *= 0.4;
+
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
-  
-  // uv += sin(t);
 
   uv *= rotation;
+  // uv.x += sin(p);
+  uv.x *= uv.y * cos(uv.x + sin(t));
+  uv.y *= sin(uv.x + p * a);
+  // uv.x += -4.0;
+  // uv.y += 42.0;
+  // uv.y += a;
+  uv.y += p;
+  uv *= 4.2;
 
-  float bt = uv.x - uv.y + a;
+  uv *= 10.2 + (p * a);
+  // uv *= 10.2 * sin(t + a);
+  // uv *= a;
+  // uv *= 1000.0;
 
-  bt = sin(uv.x+uv.y);
+  b = abs(sin(uv.y * 0.2 + t));
+  g = abs(sin(uv.x * 0.2 + t));
+  // r = g + a;
 
-  bt -= sin(uv.x/uv.y+t);
-  b = sin(bt * 2.0 + t);
+  b += a;
+  r *= a;
 
-  float gt = uv.x;
-  gt *= b;
-  gt -= tan(uv.y);
+  g *= 0.6;
+  b *= 0.2;
+  r += 0.4;
+  r *= 1.4;
 
-  g = b + gt;
-  // g *= tan(gt * 0.2 + 0.25) + a;
-
-  for( float i = 0.; i < 5.; i++ ){
-    // *, +, -, / all interesting
-    g += sin( (gt * i) / t );
-  }
-  
-
-  r += g*bt;
-  r *= b+gt;
-
-  r = clamp(r,0.0,1.0);
-  b = clamp(b,0.0,1.0);
-  g = clamp(g,0.0,1.0);
-
-  r *= 0.8;
-  b *= 0.1;
-  g *= 0.4;
 
   gl_FragColor = vec4( r, g, b, 1.0 );
 }
+
+

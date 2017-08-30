@@ -7,7 +7,10 @@ uniform vec2 u_resolution;
 #define M_PI 3.14159265358979323846
 
 void main() {
-  vec2 uv = gl_FragCoord.xy/u_resolution.xy + vec2(-0.5,-0.5);
+  float adjust_aspect = 0.25;
+  vec2 aspect = vec2(1. + adjust_aspect * 2., 1.);
+  vec2 shift = vec2(-adjust_aspect,0);
+  vec2 uv = gl_FragCoord.xy/u_resolution * aspect + vec2(-0.5,-0.5) + shift;
 
   float p = u_beat;
   float a = u_amp;
@@ -33,14 +36,15 @@ void main() {
 
   p *= 0.3; // tone it down bro
 
-  // // stutter beat
-  // angle += (1.1 * sin(p));
   speed *= 0.5;
 
   // // AMP
   // a *= 0.3;
 
   float angle = t * 0.05;
+
+  // // stutter beat
+  // angle += (0.4 * sin(p));
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));

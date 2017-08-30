@@ -41,7 +41,7 @@ float rhomb(vec2 st) {
 }
 
 void main() {
-  float adjust_aspect = 0.25;
+  float adjust_aspect = 0.4;
   vec2 aspect = vec2(1. + adjust_aspect * 2., 1.);
   vec2 shift = vec2(-adjust_aspect,0);
   vec2 uv = gl_FragCoord.xy/u_resolution * aspect + vec2(-0.5,-0.5) + shift;
@@ -59,7 +59,7 @@ void main() {
   p *= 0.1;
 
   // AMP
-  a *= 0.1;
+  a *= 0.05;
 
   float angle = t * 0.05;
 
@@ -79,9 +79,6 @@ void main() {
   float cs = 2.;
   cs *= a;
 
-  // color += stroke(uv.x, .5, cs * .5);
-  // color -= stroke(circle(uv), .5, cs);
-
   color += fill(circle(uv), .65);
 
   // second variable rotates things/offset
@@ -98,7 +95,7 @@ void main() {
 
   //color += fill(tri(uv), 0.1+abs(sin(t)));
 
-  // color += fill(rhomb(uv), 0.1+abs(sin(t)));
+  // color += fill(rhomb(uv), 2.1+abs(sin(t)));
 
   // HERMIT
   // color += flip(fill(tri(uv), .5),
@@ -108,13 +105,17 @@ void main() {
   color.b = clamp(color.b,0.0,1.0);
   color.g = clamp(color.g,0.0,1.0);
 
-  color += vec3(sin(uv.x+t), sin(uv.y+t*.3), sin(wv.x+p+t));
+  color += vec3(1.0+sin(uv.x+t), sin(uv.y+t*.3), sin(wv.x+p+t));
 
-  // color *= vec3(sin(wv.x+t*.4), cos(wv.y-p), cos(wv.y+t));
+  color *= vec3(sin(wv.x+t*.4), cos(wv.y-p), cos(wv.y+t));
 
-  // color.r *= 0.8;
-  // color.b *= 0.2;
-  // color.g *= 0.2;
+  color.r *= 1.8;
+  color.b *= 0.1;
+  color.g *= 0.6;
+
+  for (int i=1; i<=5; i++) {
+    color.b /= tan(t + float(i) * cos(uv.y * uv.x));
+  }
 
   gl_FragColor = vec4( color, 1.0 );
 }
