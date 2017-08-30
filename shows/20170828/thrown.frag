@@ -53,15 +53,19 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.2;
+  t *= 0.12;
 
   // BEAT
-  p *= 0.1;
+  p *= 0.0;
+
+  p *= 0.2;
 
   // AMP
-  a *= 0.05;
+  a *= 0.00;
 
-  float angle = t * 0.05;
+  a *= 0.25;
+
+  float angle = t * 0.15;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -71,29 +75,29 @@ void main() {
   uv += vec2(.5);
 
   vec2 wv = uv;
-  wv.x = sin(wv.x - t);
-  wv.y = cos(wv.y - t);
+  wv.x = sin(wv.x - t * p + uv.x);
+  wv.y = cos(wv.y - t / p + a);
 
-  //wv *= a;
+  wv *= a + p;
 
   float cs = 2.;
   cs *= a;
 
-  color += fill(circle(uv), .65);
+  color += fill(circle(uv), 1.0+cs);
 
   // second variable rotates things/offset
   vec2 off = vec2(.1,.0);
-  color -= fill(circle(uv-off), .6-a);
+  // color -= fill(circle(uv-off), .6-a);
 
-  color -= fill(circle(wv), 1.1);
-  color += fill(circle(wv), 1.0);
+  // color -= fill(circle(wv), 1.1);
+  // color += fill(circle(wv), 1.0);
 
   // // WEIRD RECT
-  // float r = rect(uv, vec2(1.2+cs*2.));
-  // color += stroke(r, 0.5, .125);
-  // color += fill(r, 0.1+p);
+  float r = rect(uv, vec2(1.2+cs*2.));
+  color += stroke(r, 0.5, .125);
+  // color += fill(r, 0.1+p+a);
 
-  //color += fill(tri(uv), 0.1+abs(sin(t)));
+  // color += fill(tri(uv), 0.1+abs(sin(t)));
 
   // color += fill(rhomb(uv), 2.1+abs(sin(t)));
 
@@ -109,8 +113,8 @@ void main() {
 
   color *= vec3(sin(wv.x+t*.4), cos(wv.y-p), cos(wv.y+t));
 
-  color.r *= 1.8;
-  color.b *= 0.1;
+  color.r *= 0.8;
+  color.b *= 1.8;
   color.g *= 0.6;
 
   for (int i=1; i<=5; i++) {

@@ -32,21 +32,26 @@ void main() {
   // TIME
   t *= 0.2;
 
-  // BEAT
+  // uv /= tan(t);
+
+  // // BEAT
+  // p *= 0.0;
+
   p *= 0.1;
 
-  // AMP
-  a *= 0.001;
+  // // AMP
+  // a *= 0.001;
 
-  a *= 0.1;
+  a *= 0.21;
 
-  float angle = t * 0.05;
+  float angle = t * 0.5 + a;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
   
   uv *= rotation;
-  uv += vec2(.5);
+
+  // uv += vec2(.5);
 
   vec2 wv = uv;
   wv.x = sin(wv.x + wv.y);
@@ -61,26 +66,27 @@ void main() {
 
   // cs = 0.2;
 
-  color += stroke(uv.x, .5, cs * .5);
-  // color += stroke(uv.y, .5, cs * .5);
+  // color += stroke(uv.x, .5, cs * .5);
+  color += stroke(uv.y, .5, cs * .5);
 
-  color += stroke(circle(uv), .5 + abs(sin(t)) * .2, cs);
+  color += stroke(circle(uv), .5 + abs(sin(t)) * .2, cs + p);
 
   for (int i=4; i<=8; i++) {
-    color += stroke(circle(uv), (float(i) + abs(sin(t))) * .2, cs * .1);
+    color += stroke(circle(uv), (float(i) + abs(sin(t))) * .25, cs * .1 + p);
   }
 
   color.r = clamp(color.r,0.0,1.0);
   color.b = clamp(color.b,0.0,1.0);
   color.g = clamp(color.g,0.0,1.0);
 
-  // color += vec3(sin(uv.x+t), cos(uv.y), 1.0);
-  // color *= vec3(sin(wv.x+t/2.), cos(wv.y*wv.x - a), 1.0);
-  // color /= vec3(sin(wv.y+wv.x), cos(uv.y*uv.x - t), 1.0);
+  // color += vec3(sin(uv.x+t/4.0), cos(uv.y), 1.0);
+  color *= vec3(sin(wv.x+t/2.), cos(wv.y*wv.x - a), 1.0);
+  color += vec3(1.0, sin(uv.y+t*.5), sin(uv.x+t*.5));
 
   color.r *= 0.8;
   color.b *= 0.2;
-  color.g *= 0.5;
+  color.g *= 0.2;
 
   gl_FragColor = vec4( color, 1.0 );
 }
+
