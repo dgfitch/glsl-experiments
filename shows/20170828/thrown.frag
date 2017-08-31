@@ -58,18 +58,19 @@ void main() {
   // BEAT
   p *= 0.0;
 
-  p *= 0.2;
+  p *= 0.13;
 
   // AMP
   a *= 0.00;
 
-  a *= 0.25;
+  a *= 0.05;
 
-  float angle = t * 0.15;
+  float angle = t * 0.35;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
   
+  // uv *= sin(t/2.0) - 0.4;
   uv *= rotation;
   uv *= 1.0 - a;
   uv += vec2(.5);
@@ -83,7 +84,7 @@ void main() {
   float cs = 2.;
   cs *= a;
 
-  color += fill(circle(uv), 1.0+cs);
+  color += fill(circle(uv), 0.2-cs);
 
   // second variable rotates things/offset
   vec2 off = vec2(.1,.0);
@@ -93,17 +94,18 @@ void main() {
   // color += fill(circle(wv), 1.0);
 
   // // WEIRD RECT
-  float r = rect(uv, vec2(1.2+cs*2.));
-  color += stroke(r, 0.5, .125);
+  // float r = rect(uv, vec2(1.2+cs*2.));
+  // color += stroke(r*2.0+a*p, 0.5, .125);
+  // color += stroke(r*1.2 + a, 0.5, .035);
   // color += fill(r, 0.1+p+a);
 
-  // color += fill(tri(uv), 0.1+abs(sin(t)));
+  // color += fill(tri(uv), -0.1+abs(sin(t*a)));
 
   // color += fill(rhomb(uv), 2.1+abs(sin(t)));
 
   // HERMIT
-  // color += flip(fill(tri(uv), .5),
-  //               fill(rhomb(uv), .4));
+  color += flip(fill(tri(uv), .5 + a*2.0),
+                fill(rhomb(uv), .4 + a*2.0));
 
   color.r = clamp(color.r,0.0,1.0);
   color.b = clamp(color.b,0.0,1.0);
@@ -111,14 +113,15 @@ void main() {
 
   color += vec3(1.0+sin(uv.x+t), sin(uv.y+t*.3), sin(wv.x+p+t));
 
-  color *= vec3(sin(wv.x+t*.4), cos(wv.y-p), cos(wv.y+t));
+  // color *= vec3(sin(wv.x+t*.4), cos(wv.y-p), cos(wv.y+t));
 
-  color.r *= 0.8;
-  color.b *= 1.8;
-  color.g *= 0.6;
+  color.r *= 0.4;
+  // color.b += 0.3;
+  color.b *= 1.2;
+  color.g *= 0.8;
 
   for (int i=1; i<=5; i++) {
-    color.b /= tan(t + float(i) * cos(uv.y * uv.x));
+    color.g /= tan(t + float(i) * cos(uv.y * uv.x));
   }
 
   gl_FragColor = vec4( color, 1.0 );
