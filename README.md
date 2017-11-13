@@ -36,6 +36,9 @@ needed to learn GLSL and make generative music along with it.
   - imap equivalents so no need to swap out of insert mode
 - it would be cool to keep revision history of evolution through a set in realtime 
   - git autocommit works but is kind of clumsy
+- MIDI input
+  - sudo aconnect -i
+  - sudo aseqdump -p <PORT>
 
 ## Misc 
 
