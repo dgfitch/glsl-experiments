@@ -25,12 +25,12 @@ nmap <Leader>r `RzOgc}:SaveActive()<CR>
 nmap <Leader>y `Y:SaveActive()<CR>
 nmap <Leader>u `U:SaveActive()<CR>
 nmap <Leader>i `I:SaveActive()<CR>
-nmap <Leader>o `O:SaveActive()<CR>
 nmap <Leader>p `P:SaveActive()<CR>
 
 nmap <Leader>b /\/\/ BEAT<CR>gc}:SaveActive()<CR>``
 nmap <Leader>a /\/\/ AMP<CR>gc}:SaveActive()<CR>``
 nmap <Leader>t /\/\/ TIME<CR>gc}:SaveActive()<CR>``
+nmap <Leader>o /\/\/ OPTION<CR>gc}:SaveActive()<CR>``
 
 nmap <Leader><CR> gc}:SaveActive()<CR>
 nmap <Leader><Backspace> gcc:SaveActive()<CR>

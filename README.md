@@ -27,19 +27,26 @@ needed to learn GLSL and make generative music along with it.
 
 ## TODO
 
-- xmodmap stuff 
+- xmodmap or autokey binding stuff 
   - chromebook function keys 
-  - capslock combos
+  - capslock combos?
+    - `setxkbmap -option caps:escape`
 - vim macro improvements
   - quick tints
   - quick undo N changes and save 
   - imap equivalents so no need to swap out of insert mode
 - it would be cool to keep revision history of evolution through a set in realtime 
   - git autocommit works but is kind of clumsy
-- MIDI input
-  - sudo aconnect -i
-  - sudo aseqdump -p <PORT>
+- uniform.c support for more things
+  - random-er "glitch" mode
+  - make it a real LFO
+    - allow different wave shapes: sine, tri, saw
+    - allow "tipping" the wave toward early or late
+  - MIDI input
+    - sudo aconnect -i
+    - sudo aseqdump -p <PORT>
 
 ## Misc 
 
 [This garbage is licensed under the MIT license.](LICENSE)
+
