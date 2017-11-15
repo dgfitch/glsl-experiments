@@ -29,13 +29,13 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.2;
+  t *= 0.005;
 
   // BEAT
-  p *= 0.1;
+  p *= 0.04;
 
-  // AMP
-  a *= 0.1;
+  /* // AMP */
+  /* a *= 0.1; */
 
   float angle = t * 0.05;
 
@@ -47,9 +47,9 @@ void main() {
 
   float cs = 2.;
 
-  cs *= a;
+  cs = 0.2 * (p+1.);
+  cs *= a+1.;
 
-  cs = 0.2;
 
   /* color += stroke(circle(uv), .5, cs); */
 
