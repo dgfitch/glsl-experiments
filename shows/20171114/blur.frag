@@ -29,14 +29,14 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.28;
+  t *= 0.018;
 
   // BEAT
   p *= 0.02;
   p = 0.2;
 
   // AMP
-  a *= 0.5;
+  a *= 0.04;
 
   float angle = t * 0.05;
 
@@ -48,7 +48,7 @@ void main() {
 
   float cs = 2.;
 
-  cs *= a * 2.8;
+  /* cs *= a * 1.8; */
 
   /* color += stroke(circle(uv), .5, cs); */
 
@@ -76,11 +76,11 @@ void main() {
   // suffuse with sky
   color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
-  color.r *= 1.0;
-  color.b *= 1.2;
-  color.g *= 0.2;
+  color.r *= 0.2;
+  color.b *= 1.0;
+  color.g *= 0.7;
 
-  color *= 0.10;
+  color *= 1.0;
 
   gl_FragColor = vec4( color, 1.0 );
 }
