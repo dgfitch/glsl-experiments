@@ -29,13 +29,13 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.00012;
+  t *= 0.012;
 
   // BEAT
   p *= 0.04;
 
-  // AMP
-  a *= 0.1;
+  /* // AMP */
+  /* a *= 0.1; */
 
   float angle = t * 0.08;
 
