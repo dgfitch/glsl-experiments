@@ -29,15 +29,15 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.005;
+  t *= 0.00012;
 
   // BEAT
   p *= 0.04;
 
-  /* // AMP */
-  /* a *= 0.1; */
+  // AMP
+  a *= 0.1;
 
-  float angle = t * 0.05;
+  float angle = t * 0.08;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -50,7 +50,6 @@ void main() {
   cs = 0.2 * (p+1.);
   cs *= a+1.;
 
-
   /* color += stroke(circle(uv), .5, cs); */
 
   for (int i=2; i<=30; i++) {
@@ -59,7 +58,7 @@ void main() {
     if (mod(j,3.) >= 1) {
       wv.x += sin(t*0.2*j)*.3;
       wv.y += cos(t*0.2*j)*.3;
-      color += stroke(circle(wv), j * .15, cs * .3);
+      color += stroke(circle(wv), j * .15, cs * .2);
     } else {
       wv.x += sin(sin((p+t)*0.001)*2.2*j)*.2;
       wv.y += cos(sin((p+t)*0.001)*2.2*j)*.2;
@@ -83,6 +82,8 @@ void main() {
   color.r *= 1.2;
   color.b *= 0.4;
   color.g *= 0.4;
+
+  color /= vec3(sin(uv.x+t), cos(uv.y), 1.0);
 
   gl_FragColor = vec4( color, 1.0 );
 }

@@ -29,7 +29,7 @@ void main() {
   float o = mod(t/os, ol);
 
   // TIME
-  t *= 0.02;
+  t *= 0.12;
 
   // BEAT
   p *= 0.01;
@@ -45,7 +45,7 @@ void main() {
   uv *= rotation;
 
   if (o <= 1.) {
-    uv += sin(t);
+    uv += sin(t+a);
   }
 
   float bt = uv.x - uv.y + a;

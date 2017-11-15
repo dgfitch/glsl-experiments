@@ -51,7 +51,7 @@ void main() {
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
   
-  uv += vec2(sin(t), 0.);
+  uv += vec2(sin(t)*0.5, 0.);
   uv *= rotation;
   uv += vec2(.5);
 
@@ -79,8 +79,12 @@ void main() {
 
   for (int i=1; i<=25; i++) {
     float j = float(i);
-    if (mod(t*2,j) >= j/4.) {
-      color.g += stroke(circle(uv), (j * j + abs(sin(t))) * .008, cs * j * 0.05 + abs(sin(t))*0.2*a);
+    if (mod(t*4,j) >= j/2.) {
+      if (mod(j,3) >= 1.) {
+        color.g += stroke(circle(uv), (j * j + abs(sin(t))) * .008, cs * j * 0.05 + abs(sin(t))*0.2*a);
+      } else {
+        color.b += stroke(circle(uv), (j * j + abs(sin(t))) * .008, cs * j * 0.05 + abs(sin(t))*0.2*a);
+      }
     }
   }
 
@@ -90,7 +94,7 @@ void main() {
 
   color += vec3(sin(uv.x+t), cos(wv.y)*0.8, 0.2);
 
-  color *= vec3(sin(wv.x+t/2.)*.5, cos(wv.y*wv.x - a), 1.0);
+  /* color *= vec3(sin(wv.x+t/2.)*.5, cos(wv.y*wv.x - a), 1.0); */
 
   /* color /= vec3(sin(wv.y+wv.x), cos(uv.y*uv.x - t), 1.0); */
 
@@ -98,7 +102,7 @@ void main() {
   /* color.b *= 0.2; */
   /* color.g *= 0.5; */
 
-  color *= 0.39;
+  color *= 0.29;
 
   gl_FragColor = vec4( color, 1.0 );
 }

@@ -13,8 +13,8 @@ float stroke(float x, float s, float w) {
 }
 
 float sstroke(float x, float s, float w) {
-  float d = smoothstep(s+.2, w, x * .25) -
-            smoothstep(s-.2, w*-1., x * .25);
+  float d = smoothstep(s+.2, w, x * .45) -
+            smoothstep(s-.2, w*-1., x * .65);
   return clamp(d, 0., 1.);
 }
 
@@ -36,53 +36,56 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.0113;
+  t *= 0.02;
 
   // BEAT
-  p *= 0.0;
+  p *= 0.001;
 
-  p *= 0.4;
+  p *= 0.2;
 
   // AMP
   a *= 0.001;
 
-  a *= 0.1;
+  /* a *= 0.1; */
 
   float angle = t * 0.5;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
   
-  uv *= vec2(4.05);
+  uv += vec2(sin(t)*0.5, -0.4 * a);
+
   uv *= rotation;
-  uv += vec2(sin(t), 0.);
-  uv += vec2(2.5);
+  uv += vec2(.5);
 
   vec2 wv = uv;
   wv.x = sin(wv.x + wv.y);
   wv.y = sin(wv.x - wv.y);
 
-  // color += step(.5, uv.x);
-  // color += step(.5, 1.-uv.x);
+  /* color += step(.5, uv.x); */
+  /* color += step(.5, 1.-uv.x); */
 
   float cs = 1.;
 
-  cs *= a + 0.1;
+  cs *= abs(sin(t)) * 0.01 + a + 0.1;
 
-  // cs = 0.2;
+  /* cs = 0.2; */
 
-  color.b += stroke(uv.x, .5, cs * 2.5);
-  color.b += stroke(uv.y, .5, cs * 2.5);
+  color.b += sstroke(uv.x, .5, cs * .5);
+  color.b += sstroke(uv.y, .5, cs * .5);
+  color.g += stroke(uv.x, .5, cs * 1.5)*0.85;
+  color.g += stroke(uv.y, .5, cs * 1.5)*0.85;
+  color -= stroke(uv.x, .5, cs * 2.5)*0.5;
+  color -= stroke(uv.y, .5, cs * 2.5)*0.5;
 
-  /* color.g += stroke(circle(uv), .5 + abs(sin(t)) * .2 * p, cs); */
-
-  for (int i=1; i<=35; i++) {
+  for (int i=3; i<=25; i++) {
     float j = float(i);
-    if (mod(t*20,j) >= j/2.+a) {
-      if (mod(t*40,j) >= j/2.) {
-        a = a * 2.0;
+    if (mod(t*818,j) >= j/2.) {
+      if (mod(j,5.) >= 2.) {
+        color.g += stroke(circle(uv), (j * j + abs(sin(t))) * .008 + p, cs * j * 0.05 + abs(sin(t))*0.2*a);
+      } else {
+        color.b += stroke(circle(uv), (j * j + abs(sin(t))) * .008, cs * j * 0.05 + abs(sin(t))*0.2*a);
       }
-      color.r += stroke(circle(uv), (j * j + abs(sin(t))) * .008, cs * j * 0.05 + abs(sin(t))*a);
     }
   }
 
@@ -90,17 +93,18 @@ void main() {
   color.b = clamp(color.b,0.0,1.0);
   color.g = clamp(color.g,0.0,1.0);
 
-  color += vec3(sin(uv.x+t), cos(uv.y), 1.0);
+  color += vec3(sin(uv.x+t), cos(wv.y)*0.8, 0.2);
 
-  color *= vec3(sin(wv.x+t/2.), cos(wv.y*wv.x - p), 1.0);
+  /* color *= vec3(sin(wv.x+t/2.)*.5, cos(wv.y*wv.x - a), 1.0); */
 
-  color /= vec3(sin(wv.y+wv.x), cos(uv.y*uv.x - t), 1.0);
+  /* color /= vec3(sin(wv.y+wv.x), cos(uv.y*uv.x - t), 1.0); */
 
-  color.r *= 0.8;
-  color.b *= 0.2;
-  color.g *= 0.5;
+  /* color.r *= 1.2; */
+  /* color.b *= 0.2; */
+  /* color.g *= 0.5; */
 
-  color *= 0.7;
+  color *= 0.59;
 
   gl_FragColor = vec4( color, 1.0 );
 }
+

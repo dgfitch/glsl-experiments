@@ -29,13 +29,14 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.12;
+  t *= 0.28;
 
   // BEAT
-  p *= 0.1;
+  p *= 0.02;
+  p = 0.2;
 
   // AMP
-  a *= 0.1;
+  a *= 0.5;
 
   float angle = t * 0.05;
 
@@ -47,9 +48,7 @@ void main() {
 
   float cs = 2.;
 
-  cs *= a;
-
-  cs = 0.2;
+  cs *= a * 2.8;
 
   /* color += stroke(circle(uv), .5, cs); */
 
@@ -58,10 +57,10 @@ void main() {
     vec2 wv = uv;
     float j = float(i);
     // change the divisor of the modulo for different ring effects
-    if (mod(j,3.) >= 1.0) {
+    if (mod(j,11.) >= 3.0) {
       wv.x += sin(t*0.2*j)*0.3;
       wv.y += cos(t*0.2*j)*0.3;
-      color += stroke(circle(wv), j * .15, cs * 1.2);
+      color += stroke(circle(wv), j * .15, cs * 1.2 * p);
     } else {
       wv.x += sin(sin((p+t)*0.001)*2.2*j)*.2;
       wv.y += cos(sin((p+t)*0.001)*2.2*j)*.2;
@@ -78,8 +77,10 @@ void main() {
   color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
   color.r *= 1.0;
-  color.b *= 0.4;
-  color.g *= 0.4;
+  color.b *= 1.2;
+  color.g *= 0.2;
+
+  color *= 0.10;
 
   gl_FragColor = vec4( color, 1.0 );
 }
