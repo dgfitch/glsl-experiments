@@ -36,8 +36,8 @@
 #define MAIN_DELAY 100000
 //#define DEBUG
 
-//#define ENABLE_AUDIO
-//#define ENABLE_BEAT
+#define ENABLE_AUDIO
+#define ENABLE_BEAT
 #define ENABLE_MIDI
 
 

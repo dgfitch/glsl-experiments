@@ -188,9 +188,6 @@ void* midi(void* arg) {
 	pfds = alloca(sizeof(*pfds) * npfds);
 
 	while(1) {
-    // TODO: What do I actually want to define for midi uniforms?
-    //printf("u_midi,%f\n", result);
-
 		snd_seq_poll_descriptors(seq, pfds, npfds, POLLIN);
 		if (poll(pfds, npfds, -1) < 0)
 			break;
