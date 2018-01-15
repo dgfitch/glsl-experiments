@@ -28,17 +28,22 @@ void main() {
 
   vec3 color = vec3(0.);
 
+  // // OPTION
+  // uv *= 1.5;
+
+  // uv += 1.;
+
   // TIME
-  t *= 0.48;
+  t *= 0.28;
 
   // BEAT
   p *= 0.02;
-  p = 0.5;
+  p = 0.2;
 
   // AMP
   a *= 0.18;
   
-  a *= 0.05;
+  a *= 0.5;
 
   float angle = t * 0.05;
 
@@ -78,12 +83,11 @@ void main() {
   // suffuse with sky
   color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
-  color.r *= 0.2;
-  color.b *= 0.7;
-  color.g *= 1.0;
+  color.r *= 0.5;
+  color.b *= 1.0;
+  color.g *= 0.3;
 
-  color *= 0.1;
+  color *= 0.20;
 
   gl_FragColor = vec4( color, 1.0 );
 }
-
