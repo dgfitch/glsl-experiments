@@ -29,31 +29,33 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.018;
+  t *= 0.28;
 
   // BEAT
   p *= 0.02;
   p = 0.2;
 
   // AMP
-  a *= 0.04;
+  a *= 0.18;
+  
+  a *= 0.5;
 
   float angle = t * 0.05;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
   
-  uv *= rotation;
+  uv *= rotation + a;
   uv += vec2(.5);
 
   float cs = 2.;
 
-  /* cs *= a * 1.8; */
+  cs *= a * 1.8; 
 
-  /* color += stroke(circle(uv), .5, cs); */
+  // color += stroke(circle(uv), .5, cs);
 
   // change low end of the loop, lower brighter higher sparser
-  for (int i=3; i<=30; i++) {
+  for (int i=3; i<=8; i++) {
     vec2 wv = uv;
     float j = float(i);
     // change the divisor of the modulo for different ring effects
@@ -76,11 +78,11 @@ void main() {
   // suffuse with sky
   color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
-  color.r *= 0.2;
+  color.r *= 0.5;
   color.b *= 1.0;
-  color.g *= 0.7;
+  color.g *= 0.3;
 
-  color *= 1.0;
+  color *= 0.3;
 
   gl_FragColor = vec4( color, 1.0 );
 }
