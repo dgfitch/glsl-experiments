@@ -29,16 +29,16 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.48;
+  t *= 0.018;
 
   // BEAT
   p *= 0.02;
-  p = 0.5;
+  p = 0.1;
 
-  // AMP
+  // AM
   a *= 0.18;
   
-  a *= 0.05;
+  a = 0.2;
 
   float angle = t * 0.05;
 

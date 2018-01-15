@@ -28,8 +28,8 @@ void main() {
 
   vec3 color = vec3(0.);
 
-  // // OPTION
-  // uv *= 1.5;
+  // OPTION
+  uv *= 1.5;
 
   // uv += 1.;
 

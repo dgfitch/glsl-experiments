@@ -29,24 +29,22 @@ void main() {
   vec3 color = vec3(0.);
 
   // // OPTION
-  uv *= .5;
+  // uv *= 1.2 + sin(t*0.10) * 3.0;
 
   // uv += 1.;
 
   // TIME
-  t *= 7.821;
+  t *= 0.01;
 
   // BEAT
-  p *= 0.3;
+  p *= 0.02;
+  p = 0.4;
 
-  p *= 0.3;
-  p = 0.3;
-
-
-  // // AMP
+  // AMP
   //a *= 0.18;
   
-  a *= 0.3;
+  a *= 0.2;
+
 
   float angle = t * 0.05;
 
@@ -67,14 +65,14 @@ void main() {
     vec2 wv = uv;
     float j = float(i);
     // change the divisor of the modulo for different ring effects
-    if (mod(j,11.) >= 3.0) {
+    if (mod(j,7.) >= 3.0) {
       wv.x += sin(t*0.2*j)*0.3;
       wv.y += cos(t*0.2*j)*0.3;
       color += stroke(circle(wv), j * .15, cs * 1.2 * p);
     } else {
       wv.x += sin(sin((p+t)*0.001)*2.2*j)*.2;
       wv.y += cos(sin((p+t)*0.001)*2.2*j)*.2;
-      wv *= tan(t*0.4);
+      wv *= tan(t*0.5);
       color -= stroke(circle(wv), j * .2, cs * .2 * j);
     }
   }
@@ -84,13 +82,13 @@ void main() {
   color.g = clamp(color.g,0.0,1.0);
 
   // suffuse with sky
-  color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
+  // color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
-  color.r *= 0.4;
-  color.b *= 1.2;
-  color.g *= 0.2;
+  color.r *= 1.2;
+  color.b *= 0.2;
+  color.g *= 0.4;
 
-  color *= 0.80;
+  color *= 0.50;
 
   gl_FragColor = vec4( color, 1.0 );
 }
