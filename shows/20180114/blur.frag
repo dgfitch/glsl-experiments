@@ -29,25 +29,26 @@ void main() {
   vec3 color = vec3(0.);
 
   // // OPTION
-  // uv *= 1.5;
+  uv *= .5;
 
   // uv += 1.;
 
   // TIME
-  t *= 2.274;
+  t *= 7.821;
 
   // BEAT
-  p *= 0.01;
-  // p = 0.2;
+  p *= 0.3;
+
+  p *= 0.3;
+  p = 0.3;
+
 
   // // AMP
-  a *= 0.88;
-
-    // test
+  //a *= 0.18;
   
-  // a *= 0.7;
+  a *= 0.3;
 
-  float angle = t * 0.1;
+  float angle = t * 0.05;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -85,11 +86,12 @@ void main() {
   // suffuse with sky
   color += vec3(sin(uv.x+uv.y+t), cos(uv.y), 1.0);
 
-  color.r *= 1.3;
-  color.b *= 0.5;
+  color.r *= 0.4;
+  color.b *= 1.2;
   color.g *= 0.2;
 
-  color *= 0.18;
+  color *= 0.80;
 
   gl_FragColor = vec4( color, 1.0 );
 }
+

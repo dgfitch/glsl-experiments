@@ -18,7 +18,7 @@ needed to learn GLSL and make generative music along with it.
 - [20170602](shows/20170602) - And Illusions, Pat Keen, Tippy @ Arts + Literature Laboratory
 - [20170828](shows/20170828) - Judders, Cut Shutters, And Illusions @ Arts + Literature Laboratory
 - [20171114](shows/20171114) - Sleep Now Forever, Ada Babar, BLank, Emili Earhart @ Williamson Magnetic Co.
-- [20180114](shows/20180114) - Julian Lynch and Emili Earhart, Sleep Now Forever, etc. @ Williamson Magnetic Co.
+- [20180114](shows/20180114) - Julian Lynch and Emili Earhart, Harper, Sleep Now Forever @ Williamson Magnetic Co.
 
 ## Tools used:
 
