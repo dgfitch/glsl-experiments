@@ -1,5 +1,5 @@
 uniform:
-	gcc -o bin/uniform uniform.c `pkg-config --cflags --libs libpulse,libpulse-simple` -lm -lpthread
+	gcc -o bin/uniform uniform.c audio.c midi.c -Wall `pkg-config --cflags --libs libpulse,libpulse-simple` -lasound -lm -lpthread
 
 all: uniform exp
 

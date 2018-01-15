@@ -45,10 +45,8 @@ needed to learn GLSL and make generative music along with it.
   - random-er "glitch" mode
   - make it a real LFO
     - allow different wave shapes: sine, tri, saw
-    - allow "tipping" the wave toward early or late
+    - allow "bending" the wave toward early or late
   - MIDI input
-    - sudo aconnect -i
-    - sudo aseqdump -p <PORT>
 
 ## Misc 
 
