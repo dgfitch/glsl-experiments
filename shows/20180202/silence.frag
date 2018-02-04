@@ -82,7 +82,7 @@ void main() {
   color.b *= 0.7;
   color.g *= 1.0;
 
-  color *= 0.05;
+  color *= 0.1;
 
   gl_FragColor = vec4( color, 1.0 );
 }
