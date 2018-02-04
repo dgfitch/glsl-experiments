@@ -38,7 +38,7 @@
 
 #define ENABLE_AUDIO
 #define ENABLE_BEAT
-#define ENABLE_MIDI
+//#define ENABLE_MIDI
 
 
 // Beat tracking

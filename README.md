@@ -19,12 +19,13 @@ needed to learn GLSL and make generative music along with it.
 - [20170828](shows/20170828) - Judders, Cut Shutters, And Illusions @ Arts + Literature Laboratory
 - [20171114](shows/20171114) - Sleep Now Forever, Ada Babar, BLank, Emili Earhart @ Williamson Magnetic Co.
 - [20180114](shows/20180114) - Julian Lynch and Emili Earhart, Harper, Sleep Now Forever @ Williamson Magnetic Co.
+- [20180202](shows/20180202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.
 
 ## Tools used:
 
 - [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer) for compile/display
 - [vim](http://www.vim.org/) for quick editing
-- My crappy uniform.c for tap tempo and audio input
+- My crappy uniform.c for tap tempo, audio, and MIDI input
   - You will need libpulse-dev or equivalent package to use this
   - I have no idea how to make this compile on OSX or Windows, sorry
 

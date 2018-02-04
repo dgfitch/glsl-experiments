@@ -10,8 +10,8 @@
 #define RATE 1000
 #define AUDIO_DELAY 4000
 
-// For debugging peak levels
-//#define PEAK
+// For outputting peak levels instead of exact current amplitude
+#define PEAK
 
 // Audio buffer tracking
 int16_t buffer[BUFSIZE];
@@ -93,11 +93,13 @@ void* amplitude(void* arg) {
 
     #ifdef PEAK
     if (result >= peak) {
-      printf("New peak: %f\n", result);
       peak = result;
+    } else {
+      peak *= 0.99;
     }
+    printf("u_amp,%f\n", peak);
     #else
-      printf("u_amp,%f\n", result);
+    printf("u_amp,%f\n", result);
     #endif
 
 		usleep(AUDIO_DELAY);
