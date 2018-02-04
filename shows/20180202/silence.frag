@@ -40,7 +40,7 @@ void main() {
   
   a = 0.2;
 
-  float angle = t * 0.05;
+  float angle = t * 5.05;
 
   mat2 rotation = mat2( cos(M_PI*angle), sin(M_PI*angle),
                         -sin(M_PI*angle), cos(M_PI*angle));
@@ -82,7 +82,7 @@ void main() {
   color.b *= 0.7;
   color.g *= 1.0;
 
-  color *= 0.1;
+  color *= 0.05;
 
   gl_FragColor = vec4( color, 1.0 );
 }
