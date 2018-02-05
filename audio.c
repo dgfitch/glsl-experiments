@@ -9,6 +9,14 @@
 #define BUFSIZE 32
 #define RATE 1000
 #define AUDIO_DELAY 4000
+// How fast is dropoff?
+#define START_SLANT 0.001
+// How fast is max dropoff?
+#define MAX_SLANT 0.05
+// How fast should we ramp up?
+#define MAX_ACCEL 0.08
+// What minimum floor should we ignore?
+#define NOISE_FLOOR 0.15
 
 // For outputting peak levels instead of exact current amplitude
 #define PEAK
@@ -70,32 +78,46 @@ int flush() {
 
 void* amplitude(void* arg) {
 	double result = 0.0;
-	//double last_result = 0.0;
+  int time_since_peak = 0;
   double peak = 0.0;
+  double slant = 0.0;
+  double remaining = 0.0;
 
 	while(1) {
 		pulseaudio_read(buffer, 32);
-
-		// TODO: better smart falloff or averaging
-    // of some kind to deal with low-end noise
 
 		result = 0;
 		for(int i = 0; i < 32; i++) {
 			result += abs(buffer[i]);
 		}
     result /= BUFSIZE;
-    result = log(result) / 10.0;
-    if (result < 0.2) {
-      result = result / 3.0;
-    } else if (result < 0.4) {
-      result = result / 2.0;
-    }
+    result = log(result);
+    result /= 4.5;
+    result -= 1.0;
 
     #ifdef PEAK
-    if (result >= peak) {
-      peak = result;
+    if (result >= peak && result >= NOISE_FLOOR) {
+      if (peak + MAX_ACCEL > result) {
+        peak += MAX_ACCEL;
+        remaining = result - MAX_ACCEL;
+      } else {
+        peak = result;
+      }
+      time_since_peak = 0;
+    } else if (remaining > 0.0) {
+      peak += MAX_ACCEL;
+      remaining -= MAX_ACCEL;
     } else {
-      peak *= 0.99;
+      time_since_peak += 1;
+      if (peak < 0.0) {
+        peak = 0.0;
+      } else {
+        slant = peak * START_SLANT * time_since_peak;
+        if (slant >= MAX_SLANT) {
+          slant = MAX_SLANT;
+        }
+        peak -= slant;
+      }
     }
     printf("u_amp,%f\n", peak);
     #else
