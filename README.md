@@ -20,6 +20,7 @@ needed to learn GLSL and make generative music along with it.
 - [20171114](shows/20171114) - Sleep Now Forever, Ada Babar, BLank, Emili Earhart @ Williamson Magnetic Co.
 - [20180114](shows/20180114) - Julian Lynch and Emili Earhart, Harper, Sleep Now Forever @ Williamson Magnetic Co.
 - [20180202](shows/20180202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.
+- [20180226](shows/20180226) - Drug Spider, Corridore, ?? @ High Noon Saloon
 
 ## Tools used:
 
