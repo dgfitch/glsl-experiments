@@ -42,13 +42,16 @@ needed to learn GLSL and make generative music along with it.
   - quick undo N changes and save 
   - imap equivalents so no need to swap out of insert mode
 - it would be cool to keep revision history of evolution through a set in realtime 
-  - git autocommit works but is kind of clumsy
+  - git autocommit works but is kind of clumsy - WIRE INTO SAVE FUNCTION
 - uniform.c support for more things
   - random-er "glitch" mode
   - make it a real LFO
     - allow different wave shapes: sine, tri, saw
     - allow "bending" the wave toward early or late
-  - MIDI input
+- other ideas
+  - stark masking
+  - work from tiling example
+  - work from organic fog example
 
 ## Misc 
 
