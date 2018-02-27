@@ -29,7 +29,7 @@ void main() {
   // // TIME
   // t *= 0.018;
 
-  t *= 0.038;
+  t *= 0.38;
 
   angle = t * spin_speed;
 
