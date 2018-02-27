@@ -45,7 +45,7 @@ void main() {
 
   s = rotate(s, angle);
   
-  s += vec2(2.0);
+  s += vec2(sin(t)+2.0);
 
   s *= sin(t * 4.0) * 5.0 + (a * 0.2);
 
