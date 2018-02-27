@@ -86,7 +86,7 @@ void main() {
   // c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
 
   // inverse bars small
-  // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
+  c *= vec3(sin(sin(s.y+t*s.x) + s.x));
 
   // inverse bars 2
   c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
