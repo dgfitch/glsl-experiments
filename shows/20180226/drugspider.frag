@@ -67,8 +67,8 @@ void main() {
   // s.y = abs(cos(s.y)*sin(t)-a);
 
   // radial strange
-  s.x = atan(abs(s.x),abs(s.y)) / a;
-  s.y = abs(cos(s.y)*sin(t));
+  // s.x = atan(abs(s.x),abs(s.y)) / a;
+  // s.y = abs(cos(s.y)*sin(t));
 
 
   // ROTATE AFTER?
