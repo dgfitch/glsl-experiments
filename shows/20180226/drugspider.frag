@@ -41,12 +41,12 @@ void main() {
   // AMP
   a *= 0.0;
 
-  a *= 0.4;
+  a *= 0.1;
 
 
   c = vec3(0.5);
-  // c += vec3(sin(s.x * s.y));
-  // c = vec3(s.x / s.y);
+  c += vec3(sin(s.x * s.y));
+  c = vec3(s.x / s.y);
 
 
   s = rotate(s, angle);
