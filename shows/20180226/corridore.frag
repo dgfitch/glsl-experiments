@@ -120,7 +120,7 @@ void main() {
   c = clamp(c,0.0,1.0);
 
 
-  c *= 0.5;
+  c *= 0.1;
 
   gl_FragColor = vec4( c, 1.0 );
 }
