@@ -62,7 +62,7 @@ void main() {
 
   // radial strange
   // s.x = atan(abs(s.x),abs(s.y));
-  s.y = abs(cos(s.y)*sin(t));
+  // s.y = abs(cos(s.y)*sin(t));
 
   // tv
   // s.x = cos(abs(s.x)*sin(t));
