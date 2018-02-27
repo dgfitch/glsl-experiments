@@ -68,8 +68,8 @@ void main() {
   s.y = or.y;
 
   // tv
-  // s.x = cos(abs(s.x)*sin(t+o.y)+a);
-  // s.y = abs(cos(s.y)*sin(t+o.x)+a);
+  s.x = cos(abs(s.x)*sin(t+o.y)+a);
+  s.y = abs(cos(s.y)*sin(t+o.x)+a);
 
   // radial strange
   s.x = atan(abs(s.x),abs(s.y));
