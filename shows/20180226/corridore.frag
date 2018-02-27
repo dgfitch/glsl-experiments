@@ -70,7 +70,7 @@ void main() {
   // s += vec2(t);
 
   // ROTATE AFTER?
-  // s = rotate(s, angle);
+  s = rotate(s, angle);
 
 
 
