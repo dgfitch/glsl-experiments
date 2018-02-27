@@ -87,7 +87,7 @@ void main() {
   // c -= vec3(sin(s.y-(t*2.2)-o.x));
 
   // spotlight corridors
-  c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
+  // c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
 
   // inverse bars small
   // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
