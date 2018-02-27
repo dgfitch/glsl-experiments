@@ -49,8 +49,8 @@ void main() {
   // c = vec3(s.x / s.y);
 
 
-  // s = rotate(s, angle);
-  // vec2 or = rotate(o, angle);
+  s = rotate(s, angle);
+  vec2 or = rotate(o, angle);
 
   // BENDS
 
