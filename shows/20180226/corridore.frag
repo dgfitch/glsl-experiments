@@ -41,7 +41,7 @@ void main() {
   // // AMP
   // a *= 0.0;
 
-  a *= 0.02;
+  a *= 0.2;
 
   c = vec3(0.5+a);
   // c += vec3(sin(s.x * s.y));
