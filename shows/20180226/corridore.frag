@@ -51,7 +51,7 @@ void main() {
   s = rotate(s, angle);
   vec2 or = rotate(o, angle);
 
-  s *= 2.0;
+  s *= .02;
 
 
   s += vec2(a*5.0);
