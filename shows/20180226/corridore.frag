@@ -71,8 +71,6 @@ void main() {
 
   s += 5.0 + vec2(t);
 
-  // ROTATE AFTER?
-  // s = rotate(s, angle);
 
 
 
@@ -97,6 +95,8 @@ void main() {
   // whiteness
   // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);
 
+  // ROTATE AFTER?
+  s = rotate(s, angle);
 
 
   // MASKING
