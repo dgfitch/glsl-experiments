@@ -69,7 +69,7 @@ void main() {
   s.x = cos(abs(s.x)*sin(t));
   s.y = abs(cos(s.y)*sin(t));
 
-  s += 1.0 + vec2(t);
+  s += 2.0 + vec2(t);
 
   // ROTATE AFTER?
   // s = rotate(s, angle);
