@@ -110,7 +110,7 @@ void main() {
   d = vec3(abs(o.x - o.y));
   d *= vec3(abs(1.0-o.x - 1.0-o.y)) * 2.;
 
-  // d -= vec3(abs(sin(s.x + s.y)));
+  d -= vec3(abs(sin(s.x + s.y)));
 
   //c -= d;
   c -= d;
@@ -118,7 +118,7 @@ void main() {
   c = clamp(c,0.0,1.0);
 
 
-  c *= 0.4;
+  c *= 0.3;
 
   gl_FragColor = vec4( c, 1.0 );
 }
