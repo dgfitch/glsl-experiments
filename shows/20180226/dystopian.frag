@@ -51,7 +51,7 @@ void main() {
   c /= vec3(s.x - s.y);
 
   s.y = abs(cos(s.x)*sin(t));
-  s.x = cos(abs(s.x)*sin(t));
+  s.x = cos(abs(s.y)*sin(t));
 
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + t / s.y - a));
