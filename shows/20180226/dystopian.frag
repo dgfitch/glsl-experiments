@@ -47,7 +47,7 @@ void main() {
   s *= 2.0 + (a * 0.8);
 
   c = vec3(sin(s.x - s.y));
-  c += vec3(s.x - s.y);
+  c /= vec3(s.x - s.y);
 
   s.y = abs(cos(s.x)*sin(t));
   s.x = cos(abs(s.x)*sin(t));
