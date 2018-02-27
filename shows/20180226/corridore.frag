@@ -79,7 +79,7 @@ void main() {
 
 
   // ROTATE AFTER?
-  s = rotate(s, angle);
+  // s = rotate(s, angle);
 
 
   // COLORS
