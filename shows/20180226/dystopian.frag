@@ -37,7 +37,7 @@ void main() {
   // // AMP
   // a *= 0.12;
 
-  a *= 0.041;
+  a *= 0.141;
 
 
   angle = t * spin_speed;
@@ -45,7 +45,7 @@ void main() {
 
   s = rotate(s, angle);
 
-  s *= 12.0 + (a * 0.2) + sin(t) * 3.0;
+  s *= 12.0 + (a * 0.2) + sin(t) * 5.0;
 
 
   c = vec3(sin(s.x - s.y));
