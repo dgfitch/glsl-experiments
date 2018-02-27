@@ -64,8 +64,8 @@ void main() {
   // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  // s.x = atan((or.x),(or.y));
-  // s.y = or.y;
+  s.x = atan((or.x),(or.y));
+  s.y = or.y;
 
   // tv
   s.x = cos(abs(s.x)*sin(t+o.y)+a);
