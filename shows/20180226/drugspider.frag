@@ -27,7 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.018;
+  t *= 0.0128;
 
   t *= 0.8438;
 
