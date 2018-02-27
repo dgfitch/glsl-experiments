@@ -23,7 +23,7 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.533;
+  float spin_speed = 10.533;
   float angle = 0.0;
   
   // TIME
