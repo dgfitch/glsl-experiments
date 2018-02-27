@@ -27,9 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.0358;
-
-  angle = t * spin_speed + (a * 0.05);
+  t *= 0.000358;
 
   // BEAT
   //p *= 0.0; // tone it down bro
@@ -42,9 +40,12 @@ void main() {
   a *= 0.41;
 
 
+  angle = t * spin_speed + (a * 0.05);
+
+
   s = rotate(s, angle);
 
-  s *= 6.0 + (a * 0.2);
+  s *= 60.0 + (a * 0.2);
 
 
   c = vec3(sin(s.x - s.y));
@@ -53,13 +54,11 @@ void main() {
   s.y = abs(cos(o.y)*sin(t));
   s.x = cos(abs(s.x)*sin(t));
 
-  s *= 2.0 + (a * 0.2);
-
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + t / s.y - a));
   c.g += abs(sin(o.x+a));
 
-  c.bg /= c.rb;
+  c.bg *= c.rb;
   c.b += sin(o.y+a);
 
   c /= vec3(s.x / s.y + a);
