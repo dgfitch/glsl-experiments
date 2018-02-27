@@ -93,7 +93,7 @@ void main() {
   // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
 
   // inverse bars 2
-  // c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
+  c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
 
   // wobble over time
   c *= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
