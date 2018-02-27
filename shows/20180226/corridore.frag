@@ -50,13 +50,13 @@ void main() {
   // c = vec3(s.x / s.y);
 
 
+  s += vec2(a*5.0);
+
   s = rotate(s, angle);
   vec2 or = rotate(o, angle);
 
   s *= .02;
 
-
-  s += vec2(a*5.0);
 
 
   // BENDS
