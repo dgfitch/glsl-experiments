@@ -51,6 +51,8 @@ void main() {
 
   c += vec3(sin(s.x - s.y));
 
+  s *= 2.0;
+
   c /= vec3(atan(s.x / s.y));
 
 
