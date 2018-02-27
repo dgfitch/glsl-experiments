@@ -72,8 +72,8 @@ void main() {
   s += 5.0 + vec2(t);
 
 
-  ROTATE AFTER?
-  s = rotate(s, angle);
+  // ROTATE AFTER?
+  // s = rotate(s, angle);
 
 
   // COLORS
