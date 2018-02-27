@@ -27,7 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.0000458;
+  t *= 0.0000358;
 
   // BEAT
   //p *= 0.0; // tone it down bro
