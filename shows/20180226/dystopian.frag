@@ -56,7 +56,7 @@ void main() {
 
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + t / s.y - a));
-  // c.g += abs(sin(o.x+a));
+  c.g += abs(sin(o.x+a));
 
   // c.bg += c.rb;
   // c.b += sin(o.y+a);
