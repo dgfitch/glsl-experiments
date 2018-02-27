@@ -51,6 +51,8 @@ void main() {
 
   c += vec3(sin(s.x - s.y));
 
+  c /= vec3(atan(s.x / s.y));
+
 
   // masking
   d = vec3(abs(sin(o.x+t) + cos(o.y+a)));
