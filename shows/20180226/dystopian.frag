@@ -29,7 +29,7 @@ void main() {
   // TIME
   t *= 0.018;
 
-  angle = t * spin_speed;
+  angle = t * spin_speed + a;
 
   // BEAT
   p *= 0.0; // tone it down bro
