@@ -43,9 +43,9 @@ void main() {
   angle = t * spin_speed;
 
 
+  s *= sin(t * 4.0) * 5.0 + (a * 0.2);
   s = rotate(s, angle);
 
-  s *= sin(t * 4.0) * 5.0 + (a * 0.2) ;
 
 
   c = vec3(sin(s.x - s.y));
