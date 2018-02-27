@@ -29,7 +29,7 @@ void main() {
   // // TIME
   // t *= 0.008;
 
-  t *= 0.028;
+  t *= 0.128;
 
   angle = t * spin_speed;
 
@@ -51,7 +51,7 @@ void main() {
   s = rotate(s, angle);
   vec2 or = rotate(o, angle);
 
-  s *= 214.0;
+  s *= 14.0;
 
 
   s += 15.0 + vec2(a*5.0);
