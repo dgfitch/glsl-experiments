@@ -113,7 +113,7 @@ void main() {
   
   c = clamp(c,0.0,1.0);
 
-  float cscale = 0.006;
+  float cscale = 0.06;
 
   c *= cscale;
 
