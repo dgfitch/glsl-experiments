@@ -67,8 +67,8 @@ void main() {
   // s.y = abs(cos(s.y)*sin(t));
 
   // tv
-  s.x = cos(abs(s.x)*sin(t));
-  s.y = abs(cos(s.y)*sin(t));
+  // s.x = cos(abs(s.x)*sin(t));
+  // s.y = abs(cos(s.y)*sin(t));
 
 
   // ROTATE AFTER?
