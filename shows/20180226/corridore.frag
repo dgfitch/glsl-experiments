@@ -107,7 +107,7 @@ void main() {
   // d -= vec3(abs(sin(s.x + s.y)));
 
   // c -= d;
-  c -= d;
+  c = d;
 
   c = clamp(c,0.0,1.0);
 
