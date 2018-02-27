@@ -44,8 +44,6 @@ void main() {
 
   s = rotate(s, angle);
 
-  s *= 20.0;
-
   c = vec3(sin(s.x - s.y));
 
   s.y = abs(cos(s.x)*sin(t));
