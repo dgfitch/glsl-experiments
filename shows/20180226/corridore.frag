@@ -51,6 +51,9 @@ void main() {
   s = rotate(s, angle);
   vec2 or = rotate(o, angle);
 
+  s += 5.0 + vec2(t);
+
+
   // BENDS
 
   // radial bars
@@ -68,8 +71,6 @@ void main() {
   // tv
   s.x = cos(abs(s.x)*sin(t+o.y)+a);
   s.y = abs(cos(s.y)*sin(t+o.x)+a);
-
-  s += 5.0 + vec2(t);
 
 
   // ROTATE AFTER?
