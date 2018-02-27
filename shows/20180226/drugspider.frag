@@ -60,7 +60,7 @@ void main() {
 
   // radial slide
   s.x = atan((or.x),(or.y));
-  s.y = or.y*(a*0.04);
+  s.y = or.y*(a*0.4);
 
   // tv
   // s.x = cos(abs(s.x)*sin(t)+a);
