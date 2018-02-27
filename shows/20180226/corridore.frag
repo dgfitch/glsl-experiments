@@ -54,7 +54,7 @@ void main() {
   // BENDS
 
   // radial bars
-  s.x = atan(abs(or.x),abs(o.y));
+  s.x = atan(abs(or.x),abs(or.y));
   // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
