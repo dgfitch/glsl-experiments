@@ -29,7 +29,7 @@ void main() {
   // TIME
   t *= 0.0118;
 
-  t *= 1.29328;
+  t *= 1.89328;
 
   angle = t * spin_speed;
 
@@ -59,8 +59,8 @@ void main() {
   // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  s.x = atan((or.x),(or.y));
-  s.y = or.y+(a*0.14);
+  // s.x = atan((or.x),(or.y));
+  // s.y = or.y+(a*0.14);
 
   // tv
   // s.x = cos(abs(s.x)*sin(t)+a);
