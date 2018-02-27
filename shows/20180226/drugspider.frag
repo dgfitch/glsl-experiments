@@ -58,7 +58,7 @@ void main() {
 
   // radial slide
   s.x = atan((or.x),(or.y));
-  s.y = or.y*(a*0.2);
+  s.y = or.y;
 
   // radial strange
   // s.x = atan(abs(s.x),abs(s.y));
