@@ -53,7 +53,7 @@ void main() {
 
   c += vec3(sin(s.x - s.y));
 
-  c /= vec3(atan(s.x / s.y + a));
+  // c /= vec3(atan(s.x / s.y + a));
 
   c *= vec3(sin(s.y + t / s.x + a));
 
