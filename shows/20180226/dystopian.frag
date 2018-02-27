@@ -53,7 +53,6 @@ void main() {
   s.y = abs(cos(o.x)*sin(t));
   s.x = cos(abs(s.y)*sin(t));
 
-  s = rotate(s, angle);
 
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + t / s.y - a));
