@@ -53,6 +53,8 @@ void main() {
 
   s += 5.0 + vec2(t);
 
+  s *= 2.0;
+
 
   // BENDS
 
