@@ -34,7 +34,7 @@ void main() {
   // BEAT
   //p *= 0.0; // tone it down bro
   
-  p *= 0.1;
+  p *= 0.2;
 
   // // AMP
   // a *= 0.12;
