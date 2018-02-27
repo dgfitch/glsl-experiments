@@ -32,9 +32,9 @@ void main() {
   angle = t * spin_speed + (a * 0.02);
 
   // BEAT
-  p *= 0.0; // tone it down bro
+  //p *= 0.0; // tone it down bro
   
-  // p *= 0.1;
+  p *= 0.1;
 
   // // AMP
   // a *= 0.12;
