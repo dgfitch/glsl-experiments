@@ -66,8 +66,8 @@ void main() {
   // s.y = abs(cos(s.y)*sin(t));
 
   // tv
-  s.x = cos(abs(s.x)*sin(t+o.y));
-  s.y = abs(cos(s.y)*sin(t+o.x));
+  s.x = cos(abs(s.x)*sin(t+o.y)+a);
+  s.y = abs(cos(s.y)*sin(t+o.x)+a);
 
   s += 5.0 + vec2(t);
 
