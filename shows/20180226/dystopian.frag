@@ -47,7 +47,7 @@ void main() {
   
   s += vec2(sin(t)+2.0);
 
-  s *= abs(sin(t * 4.0)) * 10.0 + (a * 0.2);
+  s *= 10.0 + (a * 0.2);
 
 
   c = vec3(sin(s.x - s.y));
