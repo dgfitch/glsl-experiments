@@ -101,7 +101,7 @@ void main() {
   // c *= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
 
   // whiteness
-  c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);
+  // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);
 
 
 
