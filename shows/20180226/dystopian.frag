@@ -40,7 +40,7 @@ void main() {
   a *= 0.41;
 
 
-  angle = t * spin_speed + (a * 0.05);
+  angle = t * spin_speed;
 
 
   s = rotate(s, angle);
