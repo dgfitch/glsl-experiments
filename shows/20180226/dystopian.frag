@@ -37,7 +37,7 @@ void main() {
   // // AMP
   // a *= 0.12;
 
-  a *= 0.3;
+  a *= 0.5;
 
 
   angle = t * spin_speed;
