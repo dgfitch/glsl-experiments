@@ -109,9 +109,8 @@ void main() {
 
   c = clamp(c,0.0,1.0);
 
-  float cscale = 0.6;
 
-  c *= cscale;
+  c *= 0.5;
 
   gl_FragColor = vec4( c, 1.0 );
 }
