@@ -103,10 +103,11 @@ void main() {
   // X mask
   d = vec3(abs(o.x - o.y));
   d *= vec3(abs(1.0-o.x - 1.0-o.y));
+
   d -= vec3(abs(sin(s.x + s.y)));
 
   // c -= d;
-  c += d;
+  c /= d;
 
   c = clamp(c,0.0,1.0);
 
