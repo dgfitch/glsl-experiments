@@ -54,7 +54,7 @@ void main() {
   s *= 114.0;
 
 
-  s += 5.0 + vec2(a);
+  s += 5.0 + vec2(a*5.0);
 
 
   // BENDS
