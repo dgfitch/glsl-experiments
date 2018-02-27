@@ -27,7 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.038;
+  t *= 0.0038;
 
   angle = t * spin_speed + (a * 0.05);
 
@@ -50,13 +50,14 @@ void main() {
   c = vec3(sin(s.x - s.y));
   c /= vec3(s.x - s.y);
 
-  // s.y = abs(cos(s.x)*sin(t));
-  // s.x = cos(abs(s.y)*sin(t));
+  s.y = abs(cos(s.x)*sin(t));
+  s.x = cos(abs(s.y)*sin(t));
 
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + t / s.y - a));
+  c.g += abs(sin(o.x+a));
 
-  c.bg -= c.rb;
+  c.bg /= c.rb;
   c.b += sin(o.y+a);
 
   c /= vec3(s.x / s.y + a);
