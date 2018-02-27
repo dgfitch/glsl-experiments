@@ -69,7 +69,7 @@ void main() {
   s.x = cos(abs(s.x)*sin(t+o.y)+a);
   s.y = abs(cos(s.y)*sin(t+o.x)+a);
 
-  s += 5.0 + vec2(t);
+  s += 5.0 + vec2(sin(t));
 
 
   // ROTATE AFTER?
