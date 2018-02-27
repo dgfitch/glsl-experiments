@@ -12,7 +12,7 @@ endfun
 
 
 function! SaveActive(...)
-  write
+  write!
   write! ~/git/glsl/current/active.frag
   call AutoCommit()
 endfunction
