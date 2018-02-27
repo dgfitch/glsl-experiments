@@ -29,6 +29,8 @@ void main() {
   // TIME
   t *= 0.008;
 
+  t *= 0.028;
+
   angle = t * spin_speed;
 
   // BEAT
