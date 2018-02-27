@@ -63,7 +63,7 @@ void main() {
   // s.y = or.y*(a*0.4);
 
   // radial strange
-  s.x = atan(abs(s.x),abs(s.y));
+  s.x = atan(abs(s.x),abs(s.y)) / a;
   s.y = abs(cos(s.y)*sin(t));
 
   // tv
