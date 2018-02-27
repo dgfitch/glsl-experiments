@@ -46,14 +46,12 @@ void main() {
 
   s *= 2.0 + (a * 0.2);
 
-  s.y = abs(cos(s.x)*sin(t));
-  s.x = cos(abs(s.x)*sin(t));
 
   c = vec3(sin(s.x - s.y));
   c /= vec3(s.x - s.y);
 
-
-
+  s.y = abs(cos(s.x)*sin(t));
+  s.x = cos(abs(s.x)*sin(t));
 
   c.r += abs(sin(s.y + t / s.x + a));
   c.b += abs(cos(s.x + p / s.y - a));
