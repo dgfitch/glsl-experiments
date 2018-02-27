@@ -27,7 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.018;
+  t *= 0.028;
 
   angle = t * spin_speed + (a * 0.02);
 
