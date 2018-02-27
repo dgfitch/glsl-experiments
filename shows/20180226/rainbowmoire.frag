@@ -30,10 +30,10 @@ void main() {
   t *= 0.08;
   angle = t * spin_speed;
 
-  // // // BEAT
+  // // BEAT
   // p *= 0.0; // tone it down bro
   
-  // p *= 0.1;
+  p *= 0.1;
 
   // // AMP
   // a *= 0.12;

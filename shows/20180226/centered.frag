@@ -27,7 +27,7 @@ void main() {
   float angle = 0.0;
   
   // TIME
-  t *= 0.08;
+  t *= 0.008;
 
   angle = t * spin_speed;
 
@@ -36,13 +36,12 @@ void main() {
   
   // p *= 0.1;
 
-  // AMP
-  a *= 0.12;
+  // // AMP
+  // a *= 0.12;
 
   a *= 0.51;
 
-
-  c = vec3(0.5);
+  c = vec3(0.5+a);
   // c += vec3(sin(s.x * s.y));
   // c = vec3(s.x / s.y);
 
@@ -57,17 +56,18 @@ void main() {
   // // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  s.x = atan((or.x),(or.y));
-  s.y = or.y;
+  // s.x = atan((or.x),(or.y));
+  // s.y = or.y;
 
   // radial strange
-  // s.x = atan(abs(s.x),abs(s.y));
-  // s.y = abs(cos(s.y)*sin(t));
+  s.x = atan(abs(s.x),abs(s.y));
+  s.y = abs(cos(s.y)*sin(t));
 
   // tv
   // s.x = cos(abs(s.x)*sin(t));
   // s.y = abs(cos(s.y)*sin(t));
 
+  // s += vec2(t);
 
   // ROTATE AFTER?
   // s = rotate(s, angle);
@@ -84,13 +84,13 @@ void main() {
   // c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
 
   // inverse bars small
-  c *= vec3(sin(sin(s.y+t*s.x) + s.x));
+  // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
 
   // inverse bars 2
   c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
 
   // wobble over time
-  c *= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
+  // c *= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
 
   // whiteness
   // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);

@@ -29,7 +29,7 @@ void main() {
   vec3 color = vec3(0.);
 
   // TIME
-  t *= 0.018;
+  t *= 0.0018;
 
   // BEAT
   p *= 0.02;
@@ -82,7 +82,7 @@ void main() {
   color.b *= 0.7;
   color.g *= 1.0;
 
-  color *= 0.1;
+  color *= 0.4;
 
   gl_FragColor = vec4( color, 1.0 );
 }
