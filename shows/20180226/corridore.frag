@@ -26,10 +26,10 @@ void main() {
   float spin_speed = 1.33;
   float angle = 0.0;
   
-  // TIME
-  t *= 0.008;
+  // // TIME
+  // t *= 0.008;
 
-  t *= 3.5228;
+  t *= 0.5228;
 
   angle = t * spin_speed;
 
