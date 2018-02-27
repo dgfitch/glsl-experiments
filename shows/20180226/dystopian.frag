@@ -39,7 +39,7 @@ void main() {
   // // AMP
   // a *= 0.12;
 
-  a *= 0.31;
+  a *= 0.21;
 
 
   s = rotate(s, angle);
