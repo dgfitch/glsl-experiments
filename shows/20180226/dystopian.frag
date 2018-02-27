@@ -50,7 +50,7 @@ void main() {
   c = vec3(sin(s.x - s.y));
   // c /= vec3(s.x - s.y);
 
-  s.y = abs(cos(s.x)*sin(t));
+  s.y = abs(cos(o.x)*sin(t));
   s.x = cos(abs(s.y)*sin(t));
 
   s *= 2.0 + (a * 0.2);
