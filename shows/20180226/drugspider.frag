@@ -45,8 +45,8 @@ void main() {
 
 
   c = vec3(0.5);
-  c += vec3(sin(s.x * s.y));
-  c = vec3(s.x / s.y);
+  // c += vec3(sin(s.x * s.y));
+  // c = vec3(s.x / s.y);
 
 
   s = rotate(s, angle);
