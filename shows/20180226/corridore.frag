@@ -63,7 +63,7 @@ void main() {
 
   // radial bars
   // s.x = atan(abs(or.x),abs(or.y));
-  // s.y = atan(abs(or.y),abs(o.x));
+  s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
   // s.x = atan((or.x),(or.y));
