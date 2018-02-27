@@ -59,7 +59,7 @@ void main() {
 
   c.bg += c.rb;
 
-  // c /= vec3(s.x / s.y + a);
+  c /= vec3(s.x / s.y + a);
 
 
   // masking
