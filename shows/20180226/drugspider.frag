@@ -59,7 +59,7 @@ void main() {
   // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  s.x = atan((or.x),(or.y)) / a;
+  s.x = atan((or.x),(or.y)) * a;
   s.y = or.y*(a*0.4);
 
   // tv
