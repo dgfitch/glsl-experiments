@@ -14,15 +14,13 @@ endfun
 function! SaveActive(...)
   write!
   write! ~/git/glsl/current/active.frag
-  call AutoCommit()
+  "call AutoCommit()
 endfunction
 
 command! -nargs=+ SaveActive :call SaveActive(<q-args>)
 
 nmap <Leader>q `QzOgc}:SaveActive()<CR>
 nmap <Leader>w `WzOgc}:SaveActive()<CR>
-nmap <Leader>e `EzOgc}:SaveActive()<CR>
-nmap <Leader>r `RzOgc}:SaveActive()<CR>
 
 nmap <Leader>y `Y:SaveActive()<CR>
 nmap <Leader>u `U:SaveActive()<CR>
@@ -33,6 +31,13 @@ nmap <Leader>b /\/\/ BEAT<CR>gc}:SaveActive()<CR>``
 nmap <Leader>a /\/\/ AMP<CR>gc}:SaveActive()<CR>``
 nmap <Leader>t /\/\/ TIME<CR>gc}:SaveActive()<CR>``
 nmap <Leader>o /\/\/ OPTION<CR>gc}:SaveActive()<CR>``
+nmap <Leader>x /\/\/ SYM X<CR>gc}:SaveActive()<CR>``
+nmap <Leader>z /\/\/ SYM Y<CR>gc}:SaveActive()<CR>``
+nmap <Leader>r /\/\/ ROTATE BEFORE<CR>gc}:SaveActive()<CR>``
+nmap <Leader>e /\/\/ ROTATE AFTER<CR>gc}:SaveActive()<CR>``
+
+nmap <Leader>j <C-x>:SaveActive()<CR>
+nmap <Leader>k <C-a>:SaveActive()<CR>
 
 nmap <Leader><CR> gc}:SaveActive()<CR>
 nmap <Leader><Backspace> gcc:SaveActive()<CR>
