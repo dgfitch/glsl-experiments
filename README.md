@@ -33,17 +33,11 @@ needed to learn GLSL and make generative music along with it.
 
 ## TODO
 
-- mouse for dimming/amp adjust
-- xmodmap or autokey binding stuff 
-  - chromebook function keys 
-  - capslock combos?
-    - `setxkbmap -option caps:escape`
+- mouse for dimming/amp adjust?
 - vim macro improvements
+  - "shader" mode, where binds become easier to hit until ESC
   - quick tints
   - quick undo N changes and save 
-  - imap equivalents so no need to swap out of insert mode
-- it would be cool to keep revision history of evolution through a set in realtime 
-  - git autocommit works but is kind of clumsy - WIRE INTO SAVE FUNCTION
 - uniform.c support for more things
   - random-er "glitch" mode
   - make it a real LFO

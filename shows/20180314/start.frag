@@ -28,23 +28,23 @@ void main() {
 
   float cscale = 0.96;
   
-  //angle = t * spin_speed;
   angle = t * spin_speed;
 
   // TIME SLOW
-  t *= 0.08;
-  cscale = 0.6;
-  a *= 0.01;
+  t *= 0.18;
+  // cscale = 0.4;
+  a *= 0.4;
+  p = 0.0;
 
-  t *= 0.5;
+  t *= 0.1;
 
   // BEAT
   p *= 0.0; // tone it down bro
   
-  // p *= 0.1;
+  p *= 0.1;
 
-  // // AMP
-  // a *= 0.12;
+  // AMP
+  a *= 0.22;
 
   a *= 1.11;
 
@@ -52,10 +52,10 @@ void main() {
   // // ROTATE BEFORE
   // s = rotate(s, angle);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  // SYM X
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
   // // SYM Y
   // if (s.y < 0.) {
@@ -67,13 +67,15 @@ void main() {
 
   vec2 r = s;
 
-  r *= 4.0+p;
-  s *= 6.0;
+  r *= 3.0+p*3.;
+  s *= 5.0;
 
-  // s += sin(t*20.0) * 2.0;
+  s *= 3. + sin(t*2.0) * 0.5;
+
+  // s *= abs(sin(t*0.8)) + 1.2 * 0.5;
 
   s.y = sin(t+s.y);
-  s.x = cos(t+s.x);
+  s.x = cos(t+abs(o.x));
 
   r.y = sin(t+s.y*a);
   // r.x = cos(t+s.x);
@@ -95,11 +97,9 @@ void main() {
   d = vec3(abs(r.x - r.y));
   d *= vec3(abs(1.0-r.x - 1.0-r.y));
 
-  c -= d;
-
   c += d;
 
-  // c += d;
+  // c *= d;
 
   // c /= d;
 
