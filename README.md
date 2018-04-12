@@ -1,6 +1,6 @@
 # GLSL Lighting Experiments
 
-Work in progress.
+A work in progress for realtime livecoding visuals in raw GLSL.
 
 The main tool I'm using is [uniform.c](uniform.c), which pipes a tap-tempo
 `u_beat` uniform and an audio amplitude `u_amp` amplitude into 
@@ -14,6 +14,7 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
+- [20180413](shows/20180413) - Drug Spider, Cribshitter, Labrador, L.A.  Manatee @ Art In
 - [20180314](shows/20180314) - Disaster Passport @ High Noon Saloon
 - [20180226](shows/20180226) - Drug Spider, Corridore, Dystopian Echo @ High Noon Saloon
 - [20180202](shows/20180202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.
