@@ -23,25 +23,31 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = .33;
+  float spin_speed = .03;
   float angle = 0.0;
   
-  float cscale = 0.96;
-  float tscale = 0.12;
-  float pscale = 0.8;
-  float ascale = 0.8;
+  float cscale = 0.6;
+  float tscale = 1.212;
+  float pscale = 0.4;
+  float ascale = 0.9;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  // t *= 0.048;
-  // spin_speed = 0.1;
-  // cscale = 0.5;
-  // a *= 0.112;
+  // TIME SLOW
+  t *= 0.0148;
+  spin_speed = 0.1;
+  cscale = 0.4;
+  a *= 0.012;
+  p = 0.;
 
-  spin_speed = 0.;
+
+  if (mod(1.4*t,11.0) >= 4.0) {
+    spin_speed = 0.04;
+  } else {
+    spin_speed = 0.26;
+  }
 
   // ANGLE
   angle = t * spin_speed;
@@ -51,11 +57,11 @@ void main() {
   p *= 0.0;
   
 
-  // // AMP
-  // a *= 0.12;
+  // AMP
+  a *= 0.42;
 
-  // ROTATE BEFORE
-  s = rotate(s, angle);
+  // // ROTATE BEFORE
+  // s = rotate(s, angle + p * .1);
 
   // // SYM X
   // if (s.x < 0.) {
@@ -67,18 +73,31 @@ void main() {
   //   s.y = abs(s.y);
   // }
 
-  // ROTATE AFTER
-  s = rotate(s, angle);
+  // // ROTATE AFTER
+  // s = rotate(s, angle);
 
   vec2 r = s;
 
 
-  s *= 10.0;
+
+  if (mod(1.2*t,5.0) >= 3.0) {
+    s *= 14.0;
+  } else {
+    s *= 5.;
+  }
+
+  if (mod(0.3*t,5.0) >= 2.0) {
+    s.x += 8.0;
+  } else {
+    s.x += 1.;
+  }
 
 
   c = vec3(0.5);
-  // c = vec3(sin(s.x)*cos(s.y));
-  c += vec3(sin(s.x * s.y));
+
+  c = vec3(sin(s.x)*cos(s.y));
+
+  c += vec3(sin(s.x * s.y)) * 0.3;
 
   // c /= vec3(s.x / s.y);
 
@@ -93,8 +112,8 @@ void main() {
   // s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  // s.x = atan((or.x),(or.y));
-  // s.y = or.y+(a*0.14);
+  s.x = atan((or.x),(or.y));
+  s.y = or.y+(a*0.14);
 
   // tv
   // s.x = cos(abs(s.x)*sin(t)+a);
@@ -115,7 +134,7 @@ void main() {
   c += vec3(sin(sin(r.x+t/s.y))) * .1;
 
   // wobble over time
-  // c /= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x * a));
+  // c /= sin(t) + a;
 
   // whiteness
   // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);
@@ -131,7 +150,10 @@ void main() {
 
   // c -= d;
   d = clamp(d,0.0,1.0);
-  c += d * 0.5;
+  c -= d * 0.5;
+
+  // blueish
+  c.b = c.r / c.g;
 
   c.r = clamp(c.r,0.0,1.0);
   c.b = clamp(c.b,0.0,1.0);

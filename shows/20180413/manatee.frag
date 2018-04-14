@@ -24,23 +24,24 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.3;
+  float spin_speed = 0.24;
   float angle = 0.0;
 
-  float cscale = 0.96;
-  float tscale = 0.12;
-  float pscale = 0.8;
+  float tscale = 0.122;
+  float cscale = 0.99;
+  float pscale = 0.3;
   float ascale = 0.015;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  // t *= 0.048;
-  // spin_speed = 0.1;
-  // cscale = 0.7;
-  // a *= 0.112;
+  // TIME SLOW
+  t *= 0.118;
+  spin_speed = 0.01;
+  cscale *= 1.0;
+  a *= 0.112;
+  p *= 0.;
 
 
   // ANGLE
@@ -54,13 +55,13 @@ void main() {
   // // AMP
   // a *= 0.12;
 
-  // ROTATE BEFORE
-  s = rotate(s, angle);
+  // // ROTATE BEFORE
+  // s = rotate(s, angle);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  // SYM X
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
   // // SYM Y
   // if (s.y < 0.) {
@@ -74,13 +75,8 @@ void main() {
 
   s.y += sin(t) * 2.0;
 
-  if (mod(a*30.0+t,3.0) >= 1.0) {
-    s.x *= sin(s.y);
-    s.y *= sin(s.x + p);
-  } else {
     s.x -= cos(s.y);
     s.y += sin(s.x * 2.);
-  }
 
   // r.x = tan(s.x*2.0);
   // s.y += r.x;
@@ -89,8 +85,10 @@ void main() {
 
   // s.y = sin(s.x*3.0);
 
+  s *= 3.2;
+
   // make it weird
-  s.x += 4.0;
+  s.x += 3.0;
 
   if (mod(0.2*t,5.0) >= 3.0) {
     s *= 5.;
@@ -98,19 +96,17 @@ void main() {
   } else {
     s *= 3.;
     s.x *= r.x;
-    s.y += 2.3;
+    s.y += 3.3;
   }
 
-  // s.y += 4.0;
+  s.y += 2.0;
 
-  c.b = abs(sin(s.y * 0.2 + p));
+  c.b = abs(sin(s.y * 0.2 + p * a));
   c.g = abs(sin(s.x * 0.2 + p));
   c.r = abs(cos(s.x * o.y * 0.2 + t)) * 0.5;
 
-  s *= 2.2 + (a * 20.0);
-
   // color mods
-  float m = (sin(s.x*s.y)*0.99) * 0.1;
+  float m = (sin(s.x*s.y)*0.99) * 0.1 + a;
   m -= (cos(s.x-s.y)*.99);
   c.b += m;
   c.g /= m;
@@ -129,7 +125,9 @@ void main() {
   c.b += 0.5 + abs(sin(t+a)) * 0.3;
   c.bg += abs(sin(s.x+s.y));
 
-  // c /= d;
+  c /= d;
+
+  // c *= abs(d);
 
   c = clamp(c,0.0,1.0);
 

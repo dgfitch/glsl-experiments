@@ -24,23 +24,24 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.3;
+  float spin_speed = 0.2;
   float angle = 0.0;
 
-  float cscale = 0.96;
-  float tscale = 0.32;
-  float pscale = 0.8;
-  float ascale = 0.1;
+  float cscale = 0.99;
+  float tscale = 0.2413;
+  float pscale = 0.065;
+  float ascale = 0.51;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  // t *= 0.048;
-  // spin_speed = 0.1;
-  // cscale = 0.5;
-  // a *= 0.112;
+  // TIME SLOW
+  t *= 0.098;
+  spin_speed = 0.1;
+  cscale = 0.5;
+  a *= 0.112;
+  p *= 0.0;
 
 
   // ANGLE
@@ -51,77 +52,68 @@ void main() {
   p *= 0.0;
   
 
-  // AMP
-  a *= 0.12;
+  // // AMP
+  // a *= 0.52;
 
-  // ROTATE BEFORE
-  s = rotate(s, angle);
+  // // ROTATE BEFORE
+  // s = rotate(s, angle);
 
   // SYM X
   if (s.x < 0.) {
     s.x = abs(s.x);
   }
 
-  // // SYM Y
-  // if (s.y < 0.) {
-  //   s.y = abs(s.y);
-  // }
+  // SYM Y
+  if (s.y < 0.) {
+    s.y = abs(s.y);
+  }
 
   // ROTATE AFTER
   s = rotate(s, angle);
 
   vec2 r = s;
 
-  s.y += sin(t) * 2.0;
+  s.y += sin(t) * 3.0;
 
   if (mod(a*30.0+t,3.0) >= 1.0) {
-    s.x *= sin(o.y);
-    s.y *= sin(s.x + p);
+    s.x *= sin(s.y);
+    s.y *= sin(s.x + sin(p));
   } else {
-    s.x -= cos(s.y);
-    s.y += sin(o.x * 2.);
+    s.x -= cos(s.y) * sin(p);
+    s.y += sin(s.x * 2.);
   }
 
   // r.x = tan(s.x*2.0);
   // s.y += r.x;
 
-  s.x = sin(s.y*2.0);
+  s.x = sin(s.x*2.0);
 
-  // s.y = sin(s.x*3.0);
+  s.y = sin(s.y*3.0);
 
-  s.x += 4.0;
+  // s.x += 4.0;
 
   if (mod(0.2*t,5.0) >= 3.0) {
     s *= 5.;
-    s.y *= o.y;
+    s.y *= sin(s.y+s.x);
   } else {
     s *= 3.;
-    s.x *= o.x;
+    s.x *= sin(s.y);
     s.y += 2.3;
   }
 
-  // s.y += 4.0;
-
-  // s.y += a;
-
-  // s *= 10.2 + (p * a);
-
-  // s *= 10.2 * sin(t + a);
-
-  // s *= 100.0;
-
-  c.b = abs(sin(s.y * 0.2 + p));
-  c.g = abs(sin(s.x * 0.2 + p));
+  c.b = abs(sin(s.y * 0.2));
+  c.g = abs(sin(s.x * 0.2));
   c.r = abs(cos(s.x * o.y * 0.2 + t));
 
-  s *= 2.2 + (a * 20.0);
+  s *= 2.2;
 
   // color bars
-  float bar = (sin(s.x*s.y)*0.99);
-  bar -= (cos(s.x-s.y)*.99);
+  float bar = sin(s.x*s.y)*0.99;
+  c.r *= bar;
+  bar -= cos(s.x-s.y)*.99;
   c.b /= bar;
   c.g += bar;
-  c.r *= bar;
+  c.r += bar;
 
 
   // masking

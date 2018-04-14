@@ -22,18 +22,17 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.03;
+  float spin_speed = 0.02;
   float angle = 0.0;
 
   float cscale = 0.96;
   
-  //angle = t * spin_speed;
   angle = t * spin_speed;
 
   // TIME SLOW
   t *= 0.18;
-  cscale = 0.8;
-  a *= 0.12;
+  cscale = 1.0;
+  a *= 0.82;
 
   // BEAT
   p *= 0.0; // tone it down bro
@@ -43,16 +42,19 @@ void main() {
   // AMP
   a *= 0.12;
 
-  a *= 0.51;
+  a *= 0.021;
+
+  // // test amplitude
+  // angle *= a;
 
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);
 
-  // SYM X
-  if (s.x < 0.) {
-    s.x = abs(s.x);
-  }
+  // // SYM X
+  // if (s.x < 0.) {
+  //   s.x = abs(s.x);
+  // }
 
   // // SYM Y
   // if (s.y < 0.) {
@@ -65,7 +67,7 @@ void main() {
   vec2 r = s;
 
   r *= 3.0+p;
-  s *= 6.0;
+  s *= 12.0;
 
   s.y = sin(t+s.y);
   s.x = cos(t+s.x);
