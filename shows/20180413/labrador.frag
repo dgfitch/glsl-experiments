@@ -28,9 +28,9 @@ void main() {
   float angle = 0.0;
 
   float cscale = 0.96;
-  float tscale = 0.32;
+  float tscale = 0.12;
   float pscale = 0.8;
-  float ascale = 0.1;
+  float ascale = 0.015;
 
   t *= tscale;
   p *= pscale;
@@ -39,7 +39,7 @@ void main() {
   // // TIME SLOW
   // t *= 0.048;
   // spin_speed = 0.1;
-  // cscale = 0.5;
+  // cscale = 0.7;
   // a *= 0.112;
 
 
@@ -51,16 +51,16 @@ void main() {
   p *= 0.0;
   
 
-  // AMP
-  a *= 0.12;
+  // // AMP
+  // a *= 0.12;
 
   // ROTATE BEFORE
   s = rotate(s, angle);
 
-  // SYM X
-  if (s.x < 0.) {
-    s.x = abs(s.x);
-  }
+  // // SYM X
+  // if (s.x < 0.) {
+  //   s.x = abs(s.x);
+  // }
 
   // // SYM Y
   // if (s.y < 0.) {
@@ -75,11 +75,11 @@ void main() {
   s.y += sin(t) * 2.0;
 
   if (mod(a*30.0+t,3.0) >= 1.0) {
-    s.x *= sin(o.y);
+    s.x *= sin(s.y);
     s.y *= sin(s.x + p);
   } else {
     s.x -= cos(s.y);
-    s.y += sin(o.x * 2.);
+    s.y += sin(s.x * 2.);
   }
 
   // r.x = tan(s.x*2.0);
@@ -89,39 +89,32 @@ void main() {
 
   // s.y = sin(s.x*3.0);
 
+  // make it weird
   s.x += 4.0;
 
   if (mod(0.2*t,5.0) >= 3.0) {
     s *= 5.;
-    s.y *= o.y;
+    s.y *= r.y;
   } else {
     s *= 3.;
-    s.x *= o.x;
+    s.x *= r.x;
     s.y += 2.3;
   }
 
   // s.y += 4.0;
 
-  // s.y += a;
-
-  // s *= 10.2 + (p * a);
-
-  // s *= 10.2 * sin(t + a);
-
-  // s *= 100.0;
-
   c.b = abs(sin(s.y * 0.2 + p));
   c.g = abs(sin(s.x * 0.2 + p));
-  c.r = abs(cos(s.x * o.y * 0.2 + t));
+  c.r = abs(cos(s.x * o.y * 0.2 + t)) * 0.5;
 
   s *= 2.2 + (a * 20.0);
 
-  // color bars
-  float bar = (sin(s.x*s.y)*0.99);
-  bar -= (cos(s.x-s.y)*.99);
-  c.b /= bar;
-  c.g += bar;
-  c.r *= bar;
+  // color mods
+  float m = (sin(s.x*s.y)*0.99) * 0.1;
+  m -= (cos(s.x-s.y)*.99);
+  c.b += m;
+  c.g /= m;
+  c.r *= m;
 
 
   // masking
@@ -132,7 +125,11 @@ void main() {
 
   // TODO: More interesting masks!
 
-  c /= d;
+  // blue it
+  c.b += 0.5 + abs(sin(t+a)) * 0.3;
+  c.bg += abs(sin(s.x+s.y));
+
+  // c /= d;
 
   c = clamp(c,0.0,1.0);
 

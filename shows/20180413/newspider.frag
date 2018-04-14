@@ -23,11 +23,11 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 1.33;
+  float spin_speed = .33;
   float angle = 0.0;
   
   float cscale = 0.96;
-  float tscale = 0.32;
+  float tscale = 0.12;
   float pscale = 0.8;
   float ascale = 0.8;
 
@@ -35,12 +35,13 @@ void main() {
   p *= pscale;
   a *= ascale;
 
-  // TIME SLOW
-  t *= 0.048;
-  spin_speed = 0.1;
-  cscale = 0.5;
-  a *= 0.112;
+  // // TIME SLOW
+  // t *= 0.048;
+  // spin_speed = 0.1;
+  // cscale = 0.5;
+  // a *= 0.112;
 
+  spin_speed = 0.;
 
   // ANGLE
   angle = t * spin_speed;
@@ -50,8 +51,8 @@ void main() {
   p *= 0.0;
   
 
-  // AMP
-  a *= 0.12;
+  // // AMP
+  // a *= 0.12;
 
   // ROTATE BEFORE
   s = rotate(s, angle);
@@ -72,11 +73,18 @@ void main() {
   vec2 r = s;
 
 
+  s *= 10.0;
+
+
   c = vec3(0.5);
-  // c += vec3(sin(s.x * s.y));
-  // c = vec3(s.x / s.y);
+  // c = vec3(sin(s.x)*cos(s.y));
+  c += vec3(sin(s.x * s.y));
+
+  // c /= vec3(s.x / s.y);
 
   vec2 or = rotate(o, angle);
+
+
 
   // BENDS
 
@@ -100,18 +108,11 @@ void main() {
 
   // COLORS
 
-  // inverted wavebend
-  // c += vec3(sin(sin(s.x+sin(t)*10.*s.y) / s.y));
-  // c.r -= (sin(s.y-(t*2.2)-o.x*a));
+  // corridor widens
+  c.r += sin(sin(s.y*r.x)) + sin(s.y+s.x*2.);
 
-  // spotlight corridors
-  c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
-
-  // inverse bars small
-  // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
-
-  // inverse bars 2
-  // c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
+  // corridor closes
+  c += vec3(sin(sin(r.x+t/s.y))) * .1;
 
   // wobble over time
   // c /= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x * a));
@@ -125,11 +126,12 @@ void main() {
   d = vec3(abs(sin(o.x+t) + cos(o.y+a)));
 
   // X mask
-  d = vec3(abs(o.x - o.y));
-  d *= vec3(abs(1.0-o.x - 1.0-o.y));
+  // d = vec3(abs(o.x - o.y));
+  // d *= vec3(abs(1.0-o.x - 1.0-o.y));
 
   // c -= d;
-  c += d;
+  d = clamp(d,0.0,1.0);
+  c += d * 0.5;
 
   c.r = clamp(c.r,0.0,1.0);
   c.b = clamp(c.b,0.0,1.0);

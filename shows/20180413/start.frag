@@ -25,17 +25,15 @@ void main() {
   float spin_speed = 0.03;
   float angle = 0.0;
 
-  float tscale = 0.36;
   float cscale = 0.96;
   
-  t *= tscale;
   //angle = t * spin_speed;
   angle = t * spin_speed;
 
-  // // TIME SLOW
-  // t *= 0.018;
-  // cscale = 0.3;
-  // a *= 0.12;
+  // TIME SLOW
+  t *= 0.18;
+  cscale = 0.8;
+  a *= 0.12;
 
   // BEAT
   p *= 0.0; // tone it down bro
@@ -75,7 +73,7 @@ void main() {
   r.y = sin(t+s.y);
   // r.x = cos(t+s.x);
 
-  c.r = s.x + s.y * .1;
+  c.r = s.x + s.y;
 
   c.b = (sin(s.x - s.y));
   c.g = (sin(r.x - r.y));
