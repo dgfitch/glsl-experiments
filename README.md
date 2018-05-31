@@ -14,7 +14,8 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
-- [20180413](shows/20180413) - Drug Spider, Cribshitter, Labrador, L.A.  Manatee @ Art In
+- [20180530](shows/20180530) - Louise Bock, Ka Baird @ Communication
+- [20180413](shows/20180413) - Drug Spider, Cribshitter, Labrador, L.A. Manatee @ Art In
 - [20180314](shows/20180314) - Disaster Passport @ High Noon Saloon
 - [20180226](shows/20180226) - Drug Spider, Corridore, Dystopian Echo @ High Noon Saloon
 - [20180202](shows/20180202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.

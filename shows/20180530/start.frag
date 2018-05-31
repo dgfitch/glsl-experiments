@@ -22,27 +22,27 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.01;
+  float spin_speed = 0.15;
   float angle = 0.0;
 
-  float cscale = 0.6;
-  float tscale = 1.512;
-  float pscale = 0.4;
+  float cscale = 0.7;
+  float tscale = 0.012212;
+  float pscale = 0.2;
   float ascale = 0.9;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
   
-  // ANGLE
-  angle = t * spin_speed;
-
   // TIME SLOW
-  t *= 0.128;
-  spin_speed = 0.1;
-  cscale = 0.4;
+  t = u_time * 0.01828;
+  spin_speed = 0.01;
+  cscale = 0.6;
   a *= 0.082;
   p = 0.;
+
+  // ANGLE
+  angle = t * spin_speed;
 
   // BEAT
   p *= 0.0; // tone it down bro
@@ -53,9 +53,6 @@ void main() {
   a *= 0.12;
 
   a *= 0.021;
-
-  // // test amplitude
-  // angle *= a;
 
 
   // // ROTATE BEFORE
@@ -76,24 +73,29 @@ void main() {
 
   vec2 r = s;
 
-  r *= 3.0+p;
-  s *= 8.0;
+  r *= 27.0+p;
+  s *= 2.0;
 
   s.y = sin(t+s.y);
   s.x = cos(t+s.x);
 
   r.y = sin(t+s.y);
+
   // r.x = cos(t+s.x);
 
-  c.b = s.x + s.y;
 
-  c.r = (sin(s.x - s.y));
-  c.g = (sin(r.x - r.y));
+  c.r = s.x + s.y * p + cos(t);
 
-  // c *= vec3(sin(s.x - s.y));
+  c.g = (sin(s.x - s.y)) * 0.1;
 
-  // // inverted bars
-  c += vec3(atan(s.x / s.y));
+  c.g += (cos(r.x - r.y));
+
+  c.b = (tan(r.x / r.y + p));
+
+  c *= vec3(sin(s.x - s.y));
+
+  // // // inverted bars
+  // c += vec3(atan(s.x / s.y));
 
 
   // masking
