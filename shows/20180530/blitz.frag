@@ -23,11 +23,11 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = .03;
+  float spin_speed = .003;
   float angle = 0.0;
   
   float cscale = 0.6;
-  float tscale = 1.212;
+  float tscale = 1.512;
   float pscale = 0.4;
   float ascale = 0.9;
 
@@ -36,7 +36,7 @@ void main() {
   a *= ascale;
 
   // TIME SLOW
-  t *= 0.648;
+  t *= 0.1648;
   spin_speed = 0.1;
   cscale = 0.4;
   a *= 0.012;
@@ -57,34 +57,34 @@ void main() {
   p *= 0.0;
   
 
-  // AMP
-  a *= 0.42;
+  // // AMP
+  // a *= 0.42;
 
   // ROTATE BEFORE
   s = rotate(s, angle + p * .1);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  // SYM X
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
-  // // SYM Y
-  // if (s.y < 0.) {
-  //   s.y = abs(s.y);
-  // }
+  // SYM Y
+  if (s.y < 0.) {
+    s.y = abs(s.y);
+  }
 
-  // ROTATE AFTER
-  s = rotate(s, angle);
+  // // ROTATE AFTER
+  // s = rotate(s, angle);
 
   vec2 r = s;
 
 
 
-  if (mod(1.2*t,5.0) >= 3.0) {
-    s *= 14.0;
-  } else {
-    s *= 5.;
-  }
+  // if (mod(1.2*t,5.0) >= 3.0) {
+  //   s *= 14.0 + a;
+  // } else {
+  //   s *= 5. + a;
+  // }
 
   if (mod(0.3*t,5.0) >= 2.0) {
     s.x += 8.0;
@@ -99,7 +99,7 @@ void main() {
 
   c += vec3(sin(s.x * s.y)) * 0.3;
 
-  // c /= vec3(s.x / s.y);
+  c /= vec3(s.x / s.y);
 
   vec2 or = rotate(o, angle);
 
@@ -108,12 +108,12 @@ void main() {
   // BENDS
 
   // radial bars
-  // s.x = atan(abs(or.x*a),abs(o.y));
-  // s.y = atan(abs(or.y),abs(o.x));
+  s.x = atan(abs(or.x*a),abs(o.y));
+  s.y = atan(abs(or.y),abs(o.x));
 
   // radial slide
-  s.x = atan((or.x),(or.y));
-  s.y = or.y+(a*0.14);
+  // s.x = atan((or.x),(or.y));
+  // s.y = or.y+(a*0.14);
 
   // tv
   // s.x = cos(abs(s.x)*sin(t)+a);
@@ -131,7 +131,7 @@ void main() {
   c.r += sin(sin(s.y*r.x)) + sin(s.y+s.x*2.);
 
   // corridor closes
-  c += vec3(sin(sin(r.x+t/s.y))) * .1;
+  c += vec3(sin(sin(r.x+t/s.y))) * .4;
 
   // wobble over time
   // c /= sin(t) + a;
