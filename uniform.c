@@ -7,13 +7,15 @@
  * Current features:
  *
  * - u_beat from tapping inputs
- *    - Hit ENTER 4 times to set tempo
+ *    - Hit ENTER 4 or more times to set tempo
  *    - Hit [ or h to halve
  *    - Hit ] or l to double
  *    - Hit + or k to increase
  *    - Hit - or j to decrease
  *
  * - u_amp from audio amplitude (crappy but working)
+ *
+ * - optional u_midi from midi driver
  *
  */
 
@@ -30,53 +32,17 @@
 #include <termios.h>
 #include <assert.h>
 #include "audio.h"
+#include "beat.h"
 #include "midi.h"
 
-#define BEAT_DELAY 40000
 #define MAIN_DELAY 100000
-//#define DEBUG
+#define DEBUG true
 
-#define ENABLE_AUDIO
+//#define ENABLE_AUDIO
 #define ENABLE_BEAT
 //#define ENABLE_MIDI
 
-
-// Beat tracking
-float bpm;
-float uspb;
-
-
-
-float calc_uspb(float bpm) {
-  return 1000000.0 / (bpm / 60.0);
-}
-
-void* beater(void* arg) {
-  struct timeval beat, current, dt;
-  float beat_value = 1.0;
-
-  gettimeofday(&beat, NULL);
-	while(1) {
-    gettimeofday(&current, NULL);
-    timersub(&current, &beat, &dt);
-    beat_value *= 0.95;
-    if (dt.tv_sec * 1000000 + dt.tv_usec > uspb) {
-      beat = current;
-      beat_value = 1.0;
-      #if DEBUG
-      printf("Beat with uspb %f\n", uspb);
-      #endif
-    }
-    #if DEBUG
-    #else
-    printf("u_beat,%f\n", beat_value);
-    #endif
-		usleep(BEAT_DELAY);
-  }
-}
-
-
-// Stupid terminal hacking
+// Stupid terminal hacking to be able to get raw input
 struct termios org_opts, new_opts;
 
 void terminal_init(void) {
@@ -97,16 +63,12 @@ void terminal_shutdown(void) {
 }
 
 
-
 int main() {
   setbuf(stdout, NULL);
   terminal_init();
 	pulseaudio_begin("nothing");
 
-  // beats per minute
-  bpm = 120.0;
-  // microseconds per beat
-  uspb = calc_uspb(bpm);
+  set_bpm(120.0);
 
   struct timeval t1, t2, w1, w2, dt;
   int64_t microseconds;
@@ -118,7 +80,7 @@ int main() {
 
   #ifdef ENABLE_BEAT
   pthread_t beat_thread;
-  pthread_create(&beat_thread, NULL, beater, NULL);
+  pthread_create(&beat_thread, NULL, beat, NULL);
   #endif
 
   #ifdef ENABLE_AUDIO
@@ -138,18 +100,18 @@ int main() {
       // Left bracket or h halves tempo
       case 91:
       case 104:
-        uspb *= 2.0;
+        bpm_double();
         break;
 
       // Right bracket or l doubles tempo
       case 93:
       case 108:
-        uspb /= 2.0;
+        bpm_halve();
         break;
 
       // Backslash resets tempo to default
       case 92:
-        uspb = calc_uspb(bpm);
+        bpm_default();
         break;
 
       // Tap tempo with enter
@@ -170,16 +132,12 @@ int main() {
         microseconds = dt.tv_sec * 1000000 + dt.tv_usec;
 
         // we take 4 taps
-        uspb = microseconds / 3.0;
+        set_uspb(microseconds / 3.0);
     }
 
-    #ifdef DEBUG
-    printf("uspb is %f\n", uspb);
-    #endif
 		usleep(MAIN_DELAY);
 	}
 
-  finally:
   terminal_shutdown();
 	return 0;
 }

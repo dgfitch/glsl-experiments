@@ -170,7 +170,6 @@ static void dump_event(const snd_seq_event_t *ev)
 /* And the startup thread function */
 
 void* midi(void* arg) {
-	double result = 0.0;
   int err;
 
   init_seq();
@@ -202,5 +201,7 @@ void* midi(void* arg) {
 
 		usleep(MIDI_DELAY);
   }
+
+  return 0;
 }
 
