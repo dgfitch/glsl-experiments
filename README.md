@@ -14,16 +14,17 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
-- [20180530](shows/20180530) - Louise Bock, Ka Baird @ Communication
-- [20180413](shows/20180413) - Drug Spider, Cribshitter, Labrador, L.A. Manatee @ Art In
-- [20180314](shows/20180314) - Disaster Passport @ High Noon Saloon
-- [20180226](shows/20180226) - Drug Spider, Corridore, Dystopian Echo @ High Noon Saloon
-- [20180202](shows/20180202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.
-- [20180114](shows/20180114) - Julian Lynch and Emili Earhart, Harper, Sleep Now Forever @ Williamson Magnetic Co.
-- [20171114](shows/20171114) - Sleep Now Forever, Ada Babar, BLank, Emili Earhart @ Williamson Magnetic Co.
-- [20170828](shows/20170828) - Judders, Cut Shutters, And Illusions @ Arts + Literature Laboratory
-- [20170602](shows/20170602) - And Illusions, Pat Keen, Tippy @ Arts + Literature Laboratory
-- [20170504](shows/20170504) - Glassmen, Maniac du Jour, Twelves @ Williamson Magnetic Co.
+- [20180622](shows/2018/0622) - Cap Alan, Brekher / Lynch / Rodriguez, DB Pedersen as TBA @ Communication
+- [20180530](shows/2018/0530) - Louise Bock, Ka Baird @ Communication
+- [20180413](shows/2018/0413) - Drug Spider, Cribshitter, Labrador, L.A. Manatee @ Art In
+- [20180314](shows/2018/0314) - Disaster Passport @ High Noon Saloon
+- [20180226](shows/2018/0226) - Drug Spider, Corridore, Dystopian Echo @ High Noon Saloon
+- [20180202](shows/2018/0202) - And Illusions, IE, Louise Bock @ Williamson Magnetic Co.
+- [20180114](shows/2018/0114) - Julian Lynch and Emili Earhart, Harper, Sleep Now Forever @ Williamson Magnetic Co.
+- [20171114](shows/2017/1114) - Sleep Now Forever, Ada Babar, BLank, Emili Earhart @ Williamson Magnetic Co.
+- [20170828](shows/2017/0828) - Judders, Cut Shutters, And Illusions @ Arts + Literature Laboratory
+- [20170602](shows/2017/0602) - And Illusions, Pat Keen, Tippy @ Arts + Literature Laboratory
+- [20170504](shows/2017/0504) - Glassmen, Maniac du Jour, Twelves @ Williamson Magnetic Co.
 
 ## Tools used:
 
@@ -35,20 +36,22 @@ needed to learn GLSL and make generative music along with it.
 
 ## TODO
 
-- mouse for dimming/amp adjust?
+- `u_mouse` for dimming/amp adjust?
 - vim macro improvements
   - "shader" mode, where binds become easier to hit until ESC
   - quick tints
-  - quick undo N changes and save 
 - uniform.c support for more things
   - random-er "glitch" mode
   - make it a real LFO
-    - allow different wave shapes: sine, tri, saw
+    - allow different wave shapes: sine, tri, saw, sloped/spline
     - allow "bending" the wave toward early or late
 - other ideas
   - stark masking
   - work from tiling example
   - work from organic fog example
+  - mess with `u_time` in more ways
+    - sine wave
+    - add beat
 
 ## Misc 
 
