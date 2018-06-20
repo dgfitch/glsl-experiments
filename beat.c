@@ -10,6 +10,7 @@
 // Beat tracking variables
 float bpm;
 float uspb;
+int beat_type = 2;
 
 float calc_uspb(float b) {
   return 1000000.0 / (b / 60.0);
@@ -35,6 +36,16 @@ void bpm_halve() {
   uspb = calc_uspb(bpm);
 }
 
+void bpm_increase() {
+  bpm += 2.0;
+  uspb = calc_uspb(bpm);
+}
+
+void bpm_decrease() {
+  bpm -= 2.0;
+  uspb = calc_uspb(bpm);
+}
+
 void bpm_default() {
   bpm = 120.0;
   uspb = calc_uspb(bpm);
@@ -44,20 +55,50 @@ void bpm_default() {
 
 void* beat(void* arg) {
   struct timeval beat, current, dt;
+  float us_passed;
   float beat_value = 1.0;
+  float beat_progress = 0.0;
 
   gettimeofday(&beat, NULL);
 	while(1) {
     gettimeofday(&current, NULL);
     timersub(&current, &beat, &dt);
-    beat_value *= 0.95;
-    if (dt.tv_sec * 1000000 + dt.tv_usec > uspb) {
-      beat = current;
-      beat_value = 1.0;
-      #if DEBUG
-      printf("Beat with uspb %f\n", uspb);
-      #endif
+    us_passed = dt.tv_sec * 1000000 + dt.tv_usec;
+    beat_progress = us_passed / uspb;
+
+    switch(beat_type) {
+      case 1:
+        // Sawtooth down
+        if (beat_progress > 1.0) {
+          beat = current;
+          beat_value = 1.0;
+        } else {
+          beat_value = 1.0 - beat_progress;
+        }
+        break;
+
+      case 2:
+        // Sawtooth up
+        if (beat_progress > 1.0) {
+          beat = current;
+          beat_value = 1.0;
+        } else {
+          beat_value = beat_progress;
+        }
+        break;
+
+      case 3:
+        // Sine wave
+        if (beat_progress > 1.0) {
+          beat = current;
+          beat_value = 1.0;
+        } else {
+          // normalize a sin wave between 0.0 and 1.0 that peaks at the beat
+          beat_value = (sin(beat_progress * 2.0 * M_PI + (M_PI / 2.0)) + 1.0) / 2.0;
+        }
+        break;
     }
+
     #if DEBUG
     printf("uspb is %f\n", uspb);
     #else

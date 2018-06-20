@@ -10,7 +10,7 @@
  *    - Hit ENTER 4 or more times to set tempo
  *    - Hit [ or h to halve
  *    - Hit ] or l to double
- *    - Hit + or k to increase
+ *    - Hit = or k to increase
  *    - Hit - or j to decrease
  *
  * - u_amp from audio amplitude (crappy but working)
@@ -103,6 +103,18 @@ int main() {
       case 93:
       case 108:
         bpm_halve();
+        break;
+
+      // Minus or j decreases tempo
+      case 61:
+      case 106:
+        bpm_decrease();
+        break;
+
+      // Equals or k increases tempo
+      case 45:
+      case 107:
+        bpm_increase();
         break;
 
       // Backslash resets tempo to default
