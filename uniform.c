@@ -31,6 +31,7 @@
 #include <pthread.h>
 #include <termios.h>
 #include <assert.h>
+#include <stdbool.h>
 #include "audio.h"
 #include "beat.h"
 #include "midi.h"
@@ -74,10 +75,6 @@ int main() {
   int64_t microseconds;
   char input;
 
-  #if DEBUG
-  printf("starting uspb: %f\n", uspb);
-  #endif
-
   #ifdef ENABLE_BEAT
   pthread_t beat_thread;
   pthread_create(&beat_thread, NULL, beat, NULL);
@@ -94,7 +91,6 @@ int main() {
   #endif
 
 	while(1) {
-    start:
     input = getchar();
     switch (input) {
       // Left bracket or h halves tempo
@@ -117,22 +113,25 @@ int main() {
       // Tap tempo with enter
       case 10:
         gettimeofday(&t1, NULL);
+        bool too_slow = 0;
         for(int i=0; i<3; i++) {
           gettimeofday(&w1, NULL);
           getchar();
           gettimeofday(&w2, NULL);
           timersub(&w2, &w1, &dt);
           if (dt.tv_sec > 2.0) {
-            // eeeeeevilllll jumps
-            goto start;
+            too_slow = true;
+            break;
           }
         }
-        gettimeofday(&t2, NULL);
-        timersub(&t2, &t1, &dt);
-        microseconds = dt.tv_sec * 1000000 + dt.tv_usec;
+        if (!too_slow) {
+          gettimeofday(&t2, NULL);
+          timersub(&t2, &t1, &dt);
+          microseconds = dt.tv_sec * 1000000 + dt.tv_usec;
 
-        // we take 4 taps
-        set_uspb(microseconds / 3.0);
+          // we take 4 taps
+          set_uspb(microseconds / 3.0);
+        }
     }
 
 		usleep(MAIN_DELAY);
