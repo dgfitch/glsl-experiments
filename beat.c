@@ -12,13 +12,17 @@ float bpm;
 float uspb;
 int beat_type = 2;
 
+void set_beat_type(int t) {
+  beat_type = t;
+}
+
 float calc_uspb(float b) {
   return 1000000.0 / (b / 60.0);
 }
 
-float set_uspb(float u) {
+void set_uspb(float u) {
   uspb = u;
-  return 1000000.0 * (bpm * 60.0);
+  bpm = 1000000.0 * 60 / u;
 }
 
 void set_bpm(float b) {
@@ -94,7 +98,23 @@ void* beat(void* arg) {
           beat_value = 1.0;
         } else {
           // normalize a sin wave between 0.0 and 1.0 that peaks at the beat
-          beat_value = (sin(beat_progress * 2.0 * M_PI + (M_PI / 2.0)) + 1.0) / 2.0;
+          beat_value = (cos(beat_progress * 2.0 * M_PI) + 1.0) / 2.0;
+        }
+        break;
+
+      case 4:
+        // Triangle
+        if (beat_progress > 1.0) {
+          beat = current;
+          beat_value = 1.0;
+        } else {
+          if (beat_progress > 0.5) {
+            beat_value = beat_progress;
+          } else {
+            beat_value = 1.0 - beat_progress;
+          }
+          beat_value -= 0.5;
+          beat_value *= 2.0;
         }
         break;
     }

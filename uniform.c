@@ -93,6 +93,26 @@ int main() {
 	while(1) {
     input = getchar();
     switch (input) {
+      // p sets sawtooth down
+      case 112:
+        set_beat_type(1);
+        break;
+
+      // o sets sawtooth up
+      case 111:
+        set_beat_type(2);
+        break;
+
+      // i sets sine wave
+      case 105:
+        set_beat_type(3);
+        break;
+
+      // u sets triangle
+      case 117:
+        set_beat_type(4);
+        break;
+
       // Left bracket or h halves tempo
       case 91:
       case 104:
