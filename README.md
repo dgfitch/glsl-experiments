@@ -36,19 +36,19 @@ needed to learn GLSL and make generative music along with it.
 
 ## TODO
 
-- `u_mouse` for dimming/amp adjust?
 - vim macro improvements
   - "shader" mode, where binds become easier to hit until ESC
-  - quick tints
+  - tmux "swap to beat" things
 - uniform.c support for more things
-  - random-er "glitch" mode
-  - make it a real LFO
-    - allow different wave shapes: sine, tri, saw, sloped/spline
+  - amplitude FFT for hi/lo amplitude peaks (test if laptop speaker good enough)
+  - LFO mods
     - allow "bending" the wave toward early or late
+    - allow beat multiplier "patterns" like 4 normal beats and one that is 4 times as long
 - other ideas
   - stark masking
   - work from tiling example
   - work from organic fog example
+  - `u_mouse` for dimming/amp adjust?
   - mess with `u_time` in more ways
     - sine wave
     - add beat

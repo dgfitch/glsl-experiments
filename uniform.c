@@ -7,11 +7,15 @@
  * Current features:
  *
  * - u_beat from tapping inputs
- *    - Hit ENTER 4 or more times to set tempo
- *    - Hit [ or h to halve
- *    - Hit ] or l to double
- *    - Hit = or k to increase
- *    - Hit - or j to decrease
+ *    - ENTER 4 or more times to set tempo
+ *    - [ or h to halve
+ *    - ] or l to double
+ *    - = or k to increase
+ *    - - or j to decrease
+ *    - p to saw down (classic!)
+ *    - o to saw up
+ *    - i to sine
+ *    - u to triangle
  *
  * - u_amp from audio amplitude (crappy but working)
  *
