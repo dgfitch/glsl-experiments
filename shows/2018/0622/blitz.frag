@@ -26,27 +26,27 @@ void main() {
   float spin_speed = .03;
   float angle = 0.0;
   
-  float cscale = 0.6;
-  float tscale = 1.212;
-  float pscale = 0.2;
-  float ascale = 0.9;
+  float cscale = 1.0;
+  float tscale = 2.512;
+  float pscale = 0.02;
+  float ascale = 0.3;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  // t *= 0.1648;
-  // spin_speed = 0.1;
-  // cscale = 0.4;
-  // a *= 0.012;
-  // p = 0.;
+  // TIME SLOW
+  t *= 0.01648;
+  spin_speed = 0.1;
+  cscale = 0.9;
+  a *= 0.012;
+  p = 0.;
 
 
   if (mod(1.4*t,11.0) >= 4.0) {
     spin_speed = 0.04;
   } else {
-    spin_speed = 0.26;
+    spin_speed = 0.08;
   }
 
   // ANGLE
@@ -57,8 +57,8 @@ void main() {
   // p *= 0.0;
   
 
-  // // AMP
-  // a *= 0.42;
+  // AMP
+  a *= 0.42;
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);
@@ -79,24 +79,25 @@ void main() {
   vec2 r = s;
 
 
-  if (mod(1.2*t,5.0) >= 3.0) {
-    s *= 5. + a;
-  } else {
-    s *= 3. + p + a;
-  }
+  // if (mod(1.2*t,5.0) >= 3.0) {
+  //   s *= 3. * a;
+  // } else {
+  //   s *= 2. + p + a;
+  // }
 
   if (mod(0.3*t,5.0) >= 2.0) {
-    s += p + 1.;
+    s += 4. * p + 1.;
   } else {
-    s -= p + 1.;
+    s -= 8. * p + 1.;
   }
 
+  s *= 15. + p * .05;
 
   c = vec3(0.5);
 
-  // c = vec3(sin(s.x)*cos(s.y));
+  c = vec3(sin(s.x)*cos(s.y));
 
-  // c += vec3(sin(s.x * s.y)) * 0.3;
+  // c.g += vec3(abs(sin(s.x * s.y))) * 0.3;
 
   // c -= vec3(tan(r.x) - tan(r.y));
 
@@ -130,13 +131,17 @@ void main() {
   c.r += sin(sin(s.y*r.x)) + sin(s.y+s.x*2.);
 
   // corridor closes
-  c += vec3(sin(sin(r.x+t/s.y))) * .4;
+  // c += vec3(sin(sin(r.x+t/s.y))) * .4;
+  c.g -= sin(sin(r.x+t/s.y)) * .4;
 
   // wobble over time
-  // c /= sin(t) + a;
+  c /= sin(t) + a;
 
   // whiteness
-  // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);
+  // c.g *= sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0;
+
+  // blueish
+  // c.b = c.g / c.r;
 
 
 
@@ -150,9 +155,6 @@ void main() {
   // c -= d;
   d = clamp(d,0.0,1.0);
   c -= d * 0.5;
-
-  // blueish
-  c.b = c.r / c.g;
 
   c.r = clamp(c.r,0.0,1.0);
   c.b = clamp(c.b,0.0,1.0);

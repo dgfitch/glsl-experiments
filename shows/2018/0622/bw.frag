@@ -23,24 +23,26 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = .03;
+  float spin_speed = .08;
   float angle = 0.0;
   
   float cscale = 0.9;
-  float tscale = 1.212;
-  float pscale = 0.2;
-  float ascale = 0.9;
+  float tscale = 2.412;
+  float pscale = 0.4;
+  float ascale = 0.02;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // // TIME SLOW
-  // t *= 0.1648;
-  // spin_speed = 0.1;
-  // cscale = 0.4;
-  // a *= 0.012;
-  // p = 0.;
+  float bend = (p + a) * 9.8;
+
+  // // TIME SLOW
+  t *= 0.1648;
+  spin_speed = 0.1;
+  cscale = 0.5;
+  a *= 0.022;
+  p = 0.;
 
   // ANGLE
   angle = t * spin_speed;
@@ -54,18 +56,18 @@ void main() {
   // // ROTATE BEFORE
   // s = rotate(s, angle);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  // SYM X
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
   // // SYM Y
   // if (s.y < 0.) {
   //   s.y = abs(s.y);
   // }
 
-  // // ROTATE AFTER
-  // s = rotate(s, angle);
+  // ROTATE AFTER
+  s = rotate(s, angle);
 
   vec2 r = s;
 
@@ -73,15 +75,15 @@ void main() {
 
   // BEND SPACE
 
-  s *= 20.;
+  s *= 2.;
 
   // bend to the beat
-  float bend = (p + a) * 15.;
   s.x -= cos(abs(s.y*sin(p)*bend));
   s.y -= abs(cos(s.x*cos(p)*bend));
 
-  // wander afield
-  // s += t + sin(p) * 20.;
+  // // wander afield
+  // s += sin(p) * 2.;
+
 
 
   // COLORS
@@ -90,9 +92,13 @@ void main() {
 
   c *= sin(s.x);
 
-  // c += vec3(sin(s.x * s.y)) * 0.3;
+  c.b += sin(s.x * s.y) * 0.5;
 
   // c -= vec3(tan(r.x) - tan(r.y));
+
+  // c += .1;
+
+  cscale = .8;
 
 
   // MASKING

@@ -42,9 +42,11 @@ needed to learn GLSL and make generative music along with it.
 - uniform.c support for more things
   - amplitude FFT for hi/lo amplitude peaks (test if laptop speaker good enough)
   - LFO mods
+    - allow "firing" the LFO in a really slow 10-30s fade
     - allow "bending" the wave toward early or late
     - allow beat multiplier "patterns" like 4 normal beats and one that is 4 times as long
 - other ideas
+  - spirograph style
   - stark masking
   - work from tiling example
   - work from organic fog example

@@ -23,36 +23,39 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = .03;
+  float spin_speed = .02;
   float angle = 0.0;
   
-  float cscale = 1.0;
-  float tscale = 1.212;
-  float pscale = 0.2;
-  float ascale = 0.3;
+  float cscale = 0.9;
+  float tscale = 0.612;
+  float pscale = 0.1;
+  float ascale = 0.2;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // // TIME SLOW
-  // t *= 0.2648;
-  // spin_speed *= 0.1;
-  // cscale = 0.4;
-  // a *= 0.012;
-  // p = 0.;
+  // // TIME SLOW
+  t *= 0.2648;
+  spin_speed *= 0.1;
+  cscale = 0.7;
+  a *= 0.012;
+  p = 0.;
 
   // ANGLE
   angle = t * spin_speed;
   
-  // // BEAT
-  // p *= 0.0;
+  // // // BEAT
+  // // p *= 0.0;
   
   // // AMP
-  // a *= 0.42;
+  // a *= 0.22;
 
-  // // ROTATE BEFORE
-  // s = rotate(s, angle);
+  vec2 r = s;
+
+
+  // ROTATE BEFORE
+  s = rotate(s, angle);
 
   // // SYM X
   // if (s.x < 0.) {
@@ -64,18 +67,25 @@ void main() {
   //   s.y = abs(s.y);
   // }
 
-  // // ROTATE AFTER
-  // s = rotate(s, angle);
+  // ROTATE AFTER
+  s = rotate(s, angle);
 
-  vec2 r = s;
+
+  s *= 44. - (p * 10.);
+
+  s += a;
 
   c = vec3(0.5);
 
-  // c = vec3(sin(s.x)*cos(s.y));
+  c *= vec3(sin(s.x)*cos(s.y));
 
-  // c += vec3(sin(s.x * s.y)) * 0.3;
+  c += vec3(sin(s.y + a * or.y)) * 0.3;
 
-  // c -= vec3(tan(r.x) - tan(r.y));
+  c.r += vec3(tan(sin(s.x + r.y * s.y + t * 0.1) + t * 0.1 + p)) * 0.2 * a;
+
+
+
+  // c /= vec3(tan(s.x) - tan(r.y));
 
   vec2 or = rotate(o, angle);
 
@@ -84,15 +94,15 @@ void main() {
   // BENDS
 
   // tv
-  // s.x = cos(abs(s.x)*sin(t)+a);
-  // s.y = abs(cos(s.y)*sin(t)-a);
+  s.x = cos(abs(s.x)*sin(t)+a);
+  s.y = abs(cos(s.y)*sin(t)-a);
 
 
   // COLORS
 
-  c.r += s.y-s.x;
-  c.b += or.x-or.y;
-  //c.b += sin(s.y/s.x+t);
+  c.g += s.y-s.x;
+  c.r += or.x-or.y;
+  // c.b += sin(s.y/s.x+t);
 
 
   // MASKING
@@ -106,7 +116,7 @@ void main() {
 
   // c -= d;
 
-  // c -= d * 0.5;
+  // c /= d * 0.5;
 
   // blue override
   // c.b = c.r / c.g;
@@ -121,5 +131,6 @@ void main() {
 
   gl_FragColor = vec4( c, 1.0 );
 }
+
 
 
