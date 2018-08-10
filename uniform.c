@@ -38,6 +38,7 @@
 #include <stdbool.h>
 #include <argp.h>
 
+#include "arguments.h"
 #include "audio.h"
 #include "beat.h"
 #include "midi.h"
@@ -60,15 +61,9 @@ static struct argp_option options[] = {
   {"quiet",    'q', 0,      0,  "Don't produce any output" },
   {"silent",   's', 0,      OPTION_ALIAS },
   {"dir",      'd', "DIR",  0,  "Rotate through a directory" },
+  {"rotation-speed", 'r', "S", 0, "Rotation speed in seconds" },
   {"bpm",      'b', "BPM",  0,  "Set a starting bpm value" },
   { 0 }
-};
-
-struct arguments
-{
-  int silent, verbose;
-  char *dir;
-  float bpm;
 };
 
 static error_t
@@ -88,6 +83,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
     case 'd':
       arguments->dir = arg;
+      break;
+    case 'r':
+      arguments->rotation_speed = strtol(arg, NULL, 10);
       break;
     case 'b':
       arguments->bpm = strtof(arg, NULL);
@@ -149,6 +147,7 @@ int main(int argc, char **argv) {
   arguments.verbose = 0;
   arguments.bpm = 120.0;
   arguments.dir = "";
+  arguments.rotation_speed = 30;
 
   argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
@@ -176,7 +175,7 @@ int main(int argc, char **argv) {
 
   if (strlen(arguments.dir) > 0) {
 		pthread_t dir_thread;
-		pthread_create(&dir_thread, NULL, dir_rotator, (void*) arguments.dir);
+		pthread_create(&dir_thread, NULL, dir_rotator, (void*) &arguments);
 	}
 
 	while(1) {

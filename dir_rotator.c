@@ -8,6 +8,14 @@
 #include <math.h>
 #include <string.h>
 
+#include "arguments.h"
+
+struct frag_files {
+  char *dirpath;
+  struct dirent **eps;
+  int count;
+};
+
 int
 string_ends_with(const char * str, const char * suffix) {
   int str_len = strlen(str);
@@ -25,36 +33,48 @@ frag (const struct dirent *x)
   return string_ends_with(x->d_name, ".frag");
 }
 
-void*
-dir_rotator(void* arg) {
-  char *dirpath = (char*) arg;
-  struct dirent **eps;
-  int n;
+void
+scan_directory(struct frag_files *state) {
+#if DEBUG
+  fprintf(stderr, "Scanning for fragment files at path %s\n", state->dirpath);
+#endif
 
-  fprintf(stderr, "Scanning for fragment files at path %s\n", dirpath);
-  n = scandir (dirpath, &eps, frag, alphasort);
-  fprintf(stderr, "Found %i fragment files\n", n);
+  state->count = scandir (state->dirpath, &state->eps, frag, alphasort);
+
+  if (state->count <= 0) {
+    perror ("Couldn't open the directory or no frag files");
+  } else {
+#if DEBUG
+    fprintf(stderr, "Found %i fragment files\n", state->count);
+#endif
+	}
+  return;
+}
+
+void*
+dir_rotator(void* in) {
+  struct arguments *arg = (struct arguments*) in;
+
+  struct frag_files state = {
+    .dirpath = arg->dir
+  };
 
   int current = 0;
-
-  if (n <= 0) {
-    perror ("Couldn't open the directory or no frag files");
-	}
-
   char * file;
   char command[300];
 	while(1) {
-    if (current >= n) {
+    scan_directory(&state);
+    if (current >= state.count) {
       current = 0;
     }
 
-    file = eps[current]->d_name;
+    file = state.eps[current]->d_name;
 
-    snprintf(command, sizeof(command), "cp %s/%s current/active.frag", dirpath, file);
-    fprintf(stderr, "Switching to file %s using command %s\n", file, command);
+    snprintf(command, sizeof(command), "cp %s/%s current/active.frag", state.dirpath, file);
+    fprintf(stderr, "Switching to file %s\n", file);
     system(command);
 
-		sleep(10);
+		sleep(arg->rotation_speed);
     current++;
   }
 
