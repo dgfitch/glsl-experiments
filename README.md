@@ -14,6 +14,7 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
+- [20180622](shows/2018/0810) - Rox Tox, Gentle Leader XIV, Threadmaker @ Communication
 - [20180622](shows/2018/0622) - Cap Alan, Brekher / Lynch / Rodriguez, DB Pedersen as TBA @ Communication
 - [20180530](shows/2018/0530) - Louise Bock, Ka Baird @ Communication
 - [20180413](shows/2018/0413) - Drug Spider, Cribshitter, Labrador, L.A. Manatee @ Art In
@@ -36,6 +37,10 @@ needed to learn GLSL and make generative music along with it.
 
 ## TODO
 
+- batch automation mode
+  - find a decent args parser? or use a json format or something?
+  - maintain active.frag from uniform.c, pass in directory to rotate through, alpha sort or random
+  - external sourced measure-scale uniform values that uniform.c can control with beat * 4 lfo... section-scale that's measure*4
 - vim macro improvements
   - "shader" mode, where binds become easier to hit until ESC
   - tmux "swap to beat" things
