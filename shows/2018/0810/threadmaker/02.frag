@@ -49,11 +49,11 @@ void main() {
   
 
   // BEAT
-  p *= 0.0;
+  p *= 2.0;
   
 
-  // // AMP
-  // a *= 0.52;
+  // AMP
+  a *= 0.0;
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);

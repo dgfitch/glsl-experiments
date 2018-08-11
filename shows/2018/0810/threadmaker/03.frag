@@ -24,7 +24,7 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.2;
+  float spin_speed = 0.5;
   float angle = 0.0;
 
   float cscale = 0.99;
@@ -52,8 +52,8 @@ void main() {
   p *= 0.0;
   
 
-  // // AMP
-  // a *= 0.52;
+  // AMP
+  a *= 0.0;
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);

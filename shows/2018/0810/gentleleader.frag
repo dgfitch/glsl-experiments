@@ -27,16 +27,16 @@ void main() {
   float angle = 0.0;
   
   float cscale = 1.0;
-  float tscale = 2.512;
-  float pscale = 0.02;
-  float ascale = 0.3;
+  float tscale = 0.44512;
+  float pscale = 0.01;
+  float ascale = 0.2;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
   // TIME SLOW
-  t *= 0.01648;
+  t *= 0.02648;
   spin_speed = 0.1;
   cscale = 0.9;
   a *= 0.012;
@@ -46,19 +46,19 @@ void main() {
   if (mod(1.4*t,11.0) >= 4.0) {
     spin_speed = 0.04;
   } else {
-    spin_speed = 0.08;
+    spin_speed = -0.08;
   }
 
   // ANGLE
   angle = t * spin_speed;
   
 
-  // // BEAT
-  // p *= 0.0;
+  // BEAT
+  p *= 0.0;
   
 
-  // AMP
-  a *= 0.42;
+  // // AMP
+  // a *= 0.0;
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);
@@ -91,15 +91,7 @@ void main() {
     s -= 8. * p + 1.;
   }
 
-  s *= 15. + p * .05;
-
-  c = vec3(0.5);
-
-  c = vec3(sin(s.x)*cos(s.y));
-
-  // c.g += vec3(abs(sin(s.x * s.y))) * 0.3;
-
-  // c -= vec3(tan(r.x) - tan(r.y));
+  s *= 25. + p * .05;
 
   vec2 or = rotate(o, angle);
 
@@ -123,15 +115,23 @@ void main() {
   // s.x = atan(abs(s.x),abs(s.y)) / a;
   // s.y = abs(cos(s.y)*sin(t));
 
+  c = vec3(0.5);
+
+  c = vec3(sin(s.y)*cos(s.x));
+
+  // c.g += vec3(abs(sin(s.x * s.y))) * 0.3;
+
+  // c -= vec3(tan(r.x) - tan(r.y));
+
 
 
   // COLORS
 
   // corridor widens
-  c.r += sin(sin(s.y*r.x)) + sin(s.y+s.x*2.);
+  c.b += sin(sin(s.y*r.x)) + sin(s.y+s.x*2.);
 
   // corridor closes
-  // c += vec3(sin(sin(r.x+t/s.y))) * .4;
+  c += vec3(sin(sin(r.x+t/s.y))) * .4;
   c.g -= sin(sin(r.x+t/s.y)) * .4;
 
   // wobble over time
@@ -141,7 +141,7 @@ void main() {
   // c.g *= sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0;
 
   // blueish
-  // c.b = c.g / c.r;
+  c.b = c.g / c.r;
 
 
 

@@ -23,23 +23,23 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = 0.33;
+  float spin_speed = 0.17;
   float angle = 0.0;
   
   float cscale = 0.96;
-  float tscale = 0.12;
-  float pscale = 0.8;
+  float tscale = 0.44;
+  float pscale = 1.8;
   float ascale = 0.8;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  // t *= 0.048;
-  // spin_speed = 0.1;
-  // cscale = 0.5;
-  // a *= 0.112;
+  // TIME SLOW
+  t *= 0.148;
+  spin_speed = 0.3;
+  cscale = 0.8;
+  a *= 0.112;
 
 
   // ANGLE
@@ -50,16 +50,16 @@ void main() {
   p *= 0.0;
   
 
-  // AMP
-  a *= 0.12;
+  // // AMP
+  // a *= 0.22;
 
   // ROTATE BEFORE
-  s = rotate(s, angle);
+  // s = rotate(s, angle);
 
   // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
   // // SYM Y
   // if (s.y < 0.) {
@@ -74,7 +74,7 @@ void main() {
 
   c = vec3(0.5);
   // c += vec3(sin(s.x * s.y));
-  // c = vec3(s.x / s.y);
+  c = vec3(s.x / s.y);
 
   vec2 or = rotate(o, angle);
 
@@ -96,25 +96,28 @@ void main() {
   // s.x = atan(abs(s.x),abs(s.y)) / a;
   // s.y = abs(cos(s.y)*sin(t));
 
+  s += 1.1;
+  s *= 2.5;
+
 
 
   // COLORS
 
   // inverted wavebend
-  // c += vec3(sin(sin(s.x+sin(t)*10.*s.y) / s.y));
-  // c.r -= (sin(s.y-(t*2.2)-o.x*a));
+  c += vec3(sin(s.x+2.+sin(t)*.5*s.y * 10.));
+  c.g -= (sin(s.y-(t*2.2)-o.x*a));
 
   // spotlight corridors
-  c += vec3(sin(cos(s.x+sin(t)*100.*s.y) / s.y));
+  // c += vec3(sin(cos(s.y+(sin(t)*30.+2.*p)*s.x) / s.y));
 
   // inverse bars small
   // c *= vec3(sin(sin(s.y+t*s.x) + s.x));
 
   // inverse bars 2
-  // c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
+  c *= vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x));
 
   // wobble over time
-  // c /= sin(t) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x * a));
+  c += sin(p) * vec3(sin(sin(s.y*o.x+(t*.2)*s.x) + s.x * a));
 
   // whiteness
   // c *= vec3(sin(sin(s.y+o.x+sin(t)) + * s.x * o.y) * 2.0);

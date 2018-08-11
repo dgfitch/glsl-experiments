@@ -47,8 +47,8 @@
 #define MAIN_DELAY 100000
 #define DEBUG true
 
-//#define ENABLE_AUDIO
-//#define ENABLE_BEAT
+#define ENABLE_AUDIO
+#define ENABLE_BEAT
 //#define ENABLE_MIDI
 
 const char *argp_program_version = "uniform.c 0.1";

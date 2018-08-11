@@ -52,8 +52,8 @@ void main() {
   p *= 0.0;
   
 
-  // // AMP
-  // a *= 0.52;
+  // AMP
+  a *= 0.12;
 
   // // ROTATE BEFORE
   // s = rotate(s, angle);
