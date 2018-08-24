@@ -19,7 +19,7 @@
 #define NOISE_FLOOR 0.15
 
 // For outputting peak levels instead of exact current amplitude
-#define PEAK
+#define PEAK true
 
 // Audio buffer tracking
 int16_t buffer[BUFSIZE];

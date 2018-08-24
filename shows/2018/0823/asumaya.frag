@@ -12,6 +12,7 @@ vec2 rotate(vec2 _in, float _angle){
                       sin(M_PI*_angle),cos(M_PI*_angle));
 }
 
+
 void main() {
   vec2 s = gl_FragCoord.xy/u_resolution.xy + vec2(-0.5);
   vec2 o = s;
@@ -23,105 +24,118 @@ void main() {
   float a = u_amp;
   float t = u_time;
 
-  float spin_speed = .3;
+  float spin_speed = 0.3;
   float angle = 0.0;
-  
-  float cscale = 1.0;
-  float tscale = 1.212;
-  float pscale = 0.2;
-  float ascale = 0.3;
+
+  float cscale = 0.99;
+  float tscale = 0.0213;
+  float pscale = 0.105;
+  float ascale = 0.51;
 
   t *= tscale;
   p *= pscale;
   a *= ascale;
 
-  // // TIME SLOW
-  t *= 0.2648;
-  spin_speed *= 0.1;
-  cscale = 0.8;
+  // TIME SLOW
+  t *= 0.198;
+  spin_speed = 0.1;
+  cscale = 0.7;
   a *= 0.012;
-  p = 0.;
+  p *= 0.0;
+
 
   // ANGLE
   angle = t * spin_speed;
   
+
   // // BEAT
   // p *= 0.0;
   
+
   // AMP
-  a *= 0.42;
+  a *= 0.12;
 
-  // ROTATE BEFORE
-  s = rotate(s, angle);
+  // // ROTATE BEFORE
+  // s = rotate(s, angle);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  // SYM X
+  if (s.x < 0.) {
+    s.x = abs(s.x);
+  }
 
-  // // SYM Y
-  // if (s.y < 0.) {
-  //   s.y = abs(s.y);
-  // }
+  // SYM Y
+  if (s.y < 0.) {
+    s.y = abs(s.y);
+  }
 
   // ROTATE AFTER
   s = rotate(s, angle);
 
   vec2 r = s;
 
+  s.y += sin(t) * 3.0;
 
-  c = vec3(0.5);
+  if (mod(a*30.0+t,3.0) >= 1.0) {
+    s.x *= sin(s.y);
+    s.y *= sin(s.x + cos(p));
+  } else {
+    s.x -= sin(s.y) * cos(p);
+    s.y += sin(s.x * 2.);
+  }
 
-  vec2 or = rotate(o, angle);
+  // r.x = tan(s.x*2.0);
+  // s.y += r.x;
+
+  s.x = sin(s.x*2.0);
+
+  s.y = sin(s.y*3.0);
+
+  // s.x += 4.0;
+
+  if (mod(0.2*t,5.0) >= 3.0) {
+    s *= 5.;
+    s.y *= sin(s.y+s.x);
+  } else {
+    s *= 3.;
+    s.x *= sin(s.y);
+    s.y += 2.3;
+  }
+
+  c.b = abs(sin(s.y * 0.2));
+  c.g = abs(sin(s.x * 0.2));
+  c.r = abs(cos(s.x * o.y * 0.2 + t));
+
+  s *= 1.4;
+
+  // color bars
+  float bar = sin(s.x*s.y)*0.99;
+  //c.b *= bar;
+  bar -= cos(s.x-s.y)*.99;
+  c.g += bar;
+
+  c.r /= (bar + 1.2) * sin(t*.2);
+
+  bar += sin(r.x+r.y);
+
+  c.g /= bar;
 
 
+  // masking
+  d = vec3(abs(sin(r.x+t) + cos(r.y-t)));
 
-  // BENDS
+  // psych
+  // d = vec3(sin(r.x+s.y) + tan(r.y-t));
 
-  // tv
-  // s.x = cos(abs(s.x)*sin(t)+a);
-  // s.y = abs(cos(s.y)*sin(t)-a);
+  // TODO: More interesting masks!
 
+  c /= d;
 
-  // COLORS
-
-  c.b += abs(sin(r.x+t)*cos(r.y+(t*0.3)));
-
-  // c += vec3(sin(s.x * s.y)) * 0.3;
-
-  // c -= vec3(tan(r.x) - tan(r.y));
-
-
-  c.r += s.y-s.x;
-  //c.b += or.x-or.y;
-  //c.b += sin(s.y/s.x+t);
-
-
-  // MASKING
-  d = vec3(abs(sin(o.x+t) + cos(o.y+a)));
-
-  // X mask
-  // d = vec3(abs(o.x - o.y));
-  // d *= vec3(abs(1.0-o.x - 1.0-o.y));
-
-  d = clamp(d,0.0,1.0);
-
-  // c -= d;
-
-  // c -= d * 0.5;
-
-  // blue override
-  // c.b = c.r / c.g;
-
-  c.r = clamp(c.r,0.0,1.0);
-  c.b = clamp(c.b,0.0,1.0);
-  c.g = clamp(c.g,0.0,1.0);
-  
   c = clamp(c,0.0,1.0);
 
   c *= cscale;
 
   gl_FragColor = vec4( c, 1.0 );
 }
+
 
 
