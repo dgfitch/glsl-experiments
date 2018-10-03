@@ -14,8 +14,8 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
-- [20180622](shows/2018/0823) - Asumaya, Lamon Manuel, Skech185 @ Communication
-- [20180622](shows/2018/0810) - Rox Lee, Gentle Leader XIV, Threadmaker @ Communication
+- [20180823](shows/2018/0823) - Asumaya, Lamon Manuel, Skech185 @ Communication
+- [20180810](shows/2018/0810) - Rox Lee, Gentle Leader XIV, Threadmaker @ Communication
 - [20180622](shows/2018/0622) - Cap Alan, Brekher / Lynch / Rodriguez, DB Pedersen as TBA @ Communication
 - [20180530](shows/2018/0530) - Louise Bock, Ka Baird @ Communication
 - [20180413](shows/2018/0413) - Drug Spider, Cribshitter, Labrador, L.A. Manatee @ Art In
