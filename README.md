@@ -14,6 +14,7 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
+- [20181005](shows/2018/1005) - Combat Naps, David Poole, Seal Eggs, Lynch / Earhart / Bible @ Communication
 - [20180823](shows/2018/0823) - Asumaya, Lamon Manuel, Skech185 @ Communication
 - [20180810](shows/2018/0810) - Rox Lee, Gentle Leader XIV, Threadmaker @ Communication
 - [20180622](shows/2018/0622) - Cap Alan, Brekher / Lynch / Rodriguez, DB Pedersen as TBA @ Communication
