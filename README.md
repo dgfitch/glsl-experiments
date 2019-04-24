@@ -14,6 +14,7 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
+- [20190420](shows/2019/0420) - Asumaya, Cap Alan @ Communication
 - [20181201](shows/2018/1201) - Algorave w/ Tarek Sabbar @ Communication
 - [20181120](shows/2018/1120) - Yellowstone Apocalypse, Tubal Cain, Threadmaker @ Communication
 - [20181005](shows/2018/1005) - Combat Naps, David Poole, Seal Eggs, Lynch / Earhart / Bible @ Communication
@@ -36,7 +37,7 @@ needed to learn GLSL and make generative music along with it.
 - [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer) for compile/display
 - [vim](http://www.vim.org/) for quick editing
 - My crappy uniform.c for tap tempo, audio, and MIDI input
-  - You will need libpulse-dev or equivalent package to use this
+  - apt-get install libpulse-dev libasound2-dev
   - I have no idea how to make this compile on OSX or Windows, sorry
 
 ## TODO
