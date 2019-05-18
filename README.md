@@ -14,6 +14,7 @@ needed to learn GLSL and make generative music along with it.
 
 ## Shows
 
+- [20190517](shows/2019/0517) - Reconsiderate, Earthlings, etc. @ Bos Meadery
 - [20190420](shows/2019/0420) - Asumaya, Cap Alan @ Communication
 - [20181201](shows/2018/1201) - Algorave w/ Tarek Sabbar @ Communication
 - [20181120](shows/2018/1120) - Yellowstone Apocalypse, Tubal Cain, Threadmaker @ Communication
