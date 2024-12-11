@@ -17,7 +17,7 @@
  *    - i to sine
  *    - u to triangle
  *
- * - u_amp from audio amplitude (crappy but working)
+ * - optional u_amp from audio amplitude (crappy but working)
  *
  * - optional u_midi from midi driver
  *
@@ -47,8 +47,13 @@
 #define MAIN_DELAY 100000
 #define DEBUG true
 
-#define ENABLE_AUDIO true
+// my goofy smoothed amplitude measure isn't really that great? now that we can 
+// just pass in `--audio 0` and get a full texture, try without
+//#define ENABLE_AUDIO true
+
+// so all I'm enabling actually is the tap tempo
 #define ENABLE_BEAT true
+
 //#define ENABLE_MIDI
 
 const char *argp_program_version = "uniform.c 0.1";
@@ -130,6 +135,8 @@ void terminal_init(void) {
 
 void terminal_shutdown(void) {
   int res=0;
+  // TODO: This clearly isn't enough to put the terminal back into a normal 
+  // mode, but hey, I'm trying
   res=tcsetattr(STDIN_FILENO, TCSANOW, &org_opts);
   assert(res==0);
 }

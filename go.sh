@@ -1,2 +1,2 @@
 make
-./bin/uniform | glslViewer current/active.frag
+./bin/uniform | glslViewer --nocursor --noncurses --audio 1 current/active.frag

@@ -2,9 +2,12 @@
 
 A work in progress for realtime livecoding visuals in raw GLSL.
 
-The main tool I'm using is [uniform.c](uniform.c), which pipes a tap-tempo
-`u_beat` uniform and an audio amplitude `u_amp` amplitude into 
-glslViewer.
+The main helper I'm using is [uniform.c](uniform.c), which pipes a tap-tempo 
+`u_beat` uniform into glslViewer, which now supports audio textures via 
+`--audio 0`
+
+Note that my `.glsl` extension for many of these files no longer works, change 
+to `.frag` to use with current glslViewer.
 
 If you want to learn how to use this stuff, or how GLSL works, I recommend 
 [The Book of Shaders](https://thebookofshaders.com/) where you can learn and 
