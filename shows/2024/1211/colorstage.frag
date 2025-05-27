@@ -26,7 +26,7 @@ void main() {
   vec3 d = vec3(1.);
 
   float p = u_beat;
-  float a = texture2D(u_tex0, vec2(s.x, 0.5) ).y;
+  float a = u_amp;
   float t = u_time;
 
   float spin_speed = .03;

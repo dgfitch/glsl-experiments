@@ -14,117 +14,117 @@ vec2 rotate(vec2 _in, float _angle){
 }
 
 void main() {
-  vec2 s = gl_FragCoord.xy/u_resolution.xy + vec2(-0.5);
-  vec2 o = s;
+  //vec2 s = gl_FragCoord.xy/u_resolution.xy + vec2(-0.5);
+  //vec2 o = s;
 
-  float fft = texture2D(u_tex0, vec2(s.x, 0.)).x;
-  float vol = texture2D(u_tex0, vec2(s.x, 0.)).y;
+  //float fft = texture2D(u_tex0, vec2(s.x, 0.)).x;
+  //float vol = texture2D(u_tex0, vec2(s.x, 0.)).y;
 
-  vec3 c = vec3(0.);
-  vec3 d = vec3(1.);
+  //vec3 c = vec3(0.);
+  //vec3 d = vec3(1.);
 
-  float p = u_beat;
-  float a = u_amp;
-  float t = u_time;
+  //float p = u_beat;
+  //float a = u_amp;
+  //float t = u_time;
 
-  float spin_speed = .03;
-  float angle = 0.0;
+  //float spin_speed = .03;
+  //float angle = 0.0;
   
-  float cscale = 1.0;
-  float tscale = 1.212;
-  float pscale = 0.2;
-  float ascale = 0.3;
+  //float cscale = 1.0;
+  //float tscale = 1.212;
+  //float pscale = 0.2;
+  //float ascale = 0.3;
 
-  t *= tscale;
-  p *= pscale;
-  a *= ascale;
+  //t *= tscale;
+  //p *= pscale;
+  //a *= ascale;
 
-  // TIME SLOW
-  t *= 0.2648;
-  spin_speed *= 0.1;
-  cscale = 0.3;
-  a *= vol;
-  p = 0.;
+  //// TIME SLOW
+  //t *= 0.2648;
+  //spin_speed *= 0.1;
+  //cscale = 0.3;
+  //a *= vol;
+  //p = 0.;
 
-  // ANGLE
-  angle = t * spin_speed;
+  //// ANGLE
+  //angle = t * spin_speed;
   
-  // BEAT
-  p *= 0.0;
+  //// BEAT
+  //p *= 0.0;
 
-  // AMP
-  a *= 0.42;
+  //// AMP
+  //a *= 0.42;
 
-  // ROTATE BEFORE
-  s = rotate(s, angle);
+  //// ROTATE BEFORE
+  //s = rotate(s, angle);
 
-  // // SYM X
-  // if (s.x < 0.) {
-  //   s.x = abs(s.x);
-  // }
+  //// // SYM X
+  //// if (s.x < 0.) {
+  ////   s.x = abs(s.x);
+  //// }
 
-  // // SYM Y
-  // if (s.y < 0.) {
-  //   s.y = abs(s.y);
-  // }
+  //// // SYM Y
+  //// if (s.y < 0.) {
+  ////   s.y = abs(s.y);
+  //// }
 
-  // // ROTATE AFTER
-  // s = rotate(s, angle);
+  //// // ROTATE AFTER
+  //// s = rotate(s, angle);
 
-  vec2 r = s;
+  //vec2 r = s;
 
-  c = vec3(0.5);
+  //c = vec3(0.5);
 
-  c = vec3(sin(s.x)*cos(s.y));
+  //c = vec3(sin(s.x)*cos(s.y));
 
-  // c += vec3(sin(s.x * s.y)) * 0.3;
+  //// c += vec3(sin(s.x * s.y)) * 0.3;
 
-  c -= vec3(tan(r.x) - tan(r.y));
+  //c -= vec3(tan(r.x) - tan(r.y));
 
-  vec2 or = rotate(o, angle);
-
-
-  s *= 2.0;
-
-  // BENDS
-
-  // tv
-  // s.x = cos(abs(s.x)*tan(t)+a);
-  // s.y = sin(abs(s.y)*tan(t)-a);
+  //vec2 or = rotate(o, angle);
 
 
-  // COLORS
+  //s *= 2.0;
 
-  c.r += s.y-s.x;
-  c.b += or.x-or.y;
-  //c.b += sin(s.y/s.x+t);
+  //// BENDS
+
+  //// tv
+  //// s.x = cos(abs(s.x)*tan(t)+a);
+  //// s.y = sin(abs(s.y)*tan(t)-a);
 
 
-  // MASKING
-  d = vec3(abs(sin(o.x+t) + cos(o.y+a)));
+  //// COLORS
 
-  // X mask
-  // d = vec3(abs(o.x - o.y));
-  // d *= vec3(abs(1.0-o.x - 1.0-o.y));
+  //c.r += s.y-s.x;
+  //c.b += or.x-or.y;
+  ////c.b += sin(s.y/s.x+t);
 
-  d = clamp(d,0.0,1.0);
 
-  // c -= d;
+  //// MASKING
+  //d = vec3(abs(sin(o.x+t) + cos(o.y+a)));
 
-  // c -= d * 0.5;
+  //// X mask
+  //// d = vec3(abs(o.x - o.y));
+  //// d *= vec3(abs(1.0-o.x - 1.0-o.y));
 
-  // blue override
-  // c.b = c.r / c.g;
+  //d = clamp(d,0.0,1.0);
 
-  c.r = clamp(c.r,0.0,1.0);
-  c.b = clamp(c.b,0.0,1.0);
-  c.g = clamp(c.g,0.0,1.0);
+  //// c -= d;
+
+  //// c -= d * 0.5;
+
+  //// blue override
+  //// c.b = c.r / c.g;
+
+  //c.r = clamp(c.r,0.0,1.0);
+  //c.b = clamp(c.b,0.0,1.0);
+  //c.g = clamp(c.g,0.0,1.0);
   
-  c = clamp(c,0.0,1.0);
+  //c = clamp(c,0.0,1.0);
 
-  c *= cscale;
+  //c *= cscale;
 
-  gl_FragColor = vec4( c, 1.0 );
-}
+  //gl_FragColor = vec4( c, 1.0 );
+//}
 
 

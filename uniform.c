@@ -49,7 +49,7 @@
 
 // my goofy smoothed amplitude measure isn't really that great? now that we can 
 // just pass in `--audio 0` and get a full texture, try without
-//#define ENABLE_AUDIO true
+#define ENABLE_AUDIO true
 
 // so all I'm enabling actually is the tap tempo
 #define ENABLE_BEAT true
